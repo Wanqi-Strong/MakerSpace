@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8089/recycler/api";
+const baseUrl = "http://localhost:8089/makerSpace/api";
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(

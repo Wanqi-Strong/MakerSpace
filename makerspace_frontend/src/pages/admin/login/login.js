@@ -1,6 +1,8 @@
 import './login.css';
 
-import {useState,useRef} from "react"
+import React,{useState,useRef} from "react"
+import { useNavigate } from "react-router-dom";
+
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,31 +11,45 @@ import CustomAlert from './../../../components/alter/alter'
 function Login(props){
     const [name, setName] = useState('');
     const [pwd, setPwd] = useState('');
+    const navigate = useNavigate();
 
     const [nameInput, setNameInput] = useState(null);
     const [pwdInput, setPwdInput] = useState(null);
+
     const alter = useRef();
 
-    function handleSubmit() {
+    async function handleSubmit() {
         let form = {
-            username:name.trim(),
-            pwd:pwd.trim(),
+            userEmail:name.trim(),
+            userPwd:pwd.trim(),
         }
-        if(!form.username){
+        if(!form.userEmail){
             nameInput.focus();
             alter.current.showAlert('please input username');
             return;
         }
-        if(!form.pwd){
+        if(!form.userPwd){
             pwdInput.focus();
             alter.current.showAlert('please input password');
             return;
         }
-        console.log(form);
+        let res = await React.$req.post(React.$api.userLogin,form);
+        console.log(res);
+        if(res.success){
+            React.$utils.setSessionStorage("userInfo",res.data.data);
+            navigateTo("/home");
+        }
       }
+
+      function navigateTo(url){
+        try{
+            navigate(url);
+        }catch(e){
+            throw e;
+        }
+    }
     return(
             <div className="container flex flex_ver flex_center_all">
-                <div>
                     <Box component="form" noValidate autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>   
                         <div>
                             <TextField id="username" label="username" variant="outlined" required size="small"
@@ -45,9 +61,10 @@ function Login(props){
                             inputRef={(input) => {setPwdInput( input) }} 
                             value={pwd} onChange={(event) => {setPwd(event.target.value);}} />
                         </div>
-                        <Button variant="contained" onClick={handleSubmit}>Login</Button>
+                        <div className='center-box'>
+                            <Button variant="contained" onClick={handleSubmit} size="small" >Login</Button>
+                        </div>
                     </Box>
-                </div>
                 <CustomAlert ref={alter} severity='warning' alertTitle='incomplete form'></CustomAlert>
             </div>
     );
