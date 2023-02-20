@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User verifyUser(User user) {
-        User  currentUser= userRepository.findByUserEmail(user.getUserEmail());
+        User currentUser= userRepository.findByUserEmail(user.getUserEmail());
         if(currentUser == null) {
             throw new MakerSpaceException("user does not exist");
         }else {

@@ -9,13 +9,9 @@ import lombok.Data;
 public class Record {
     public Record(){}
 
-    public Record(String firstName, String lastName, String userEmail, Long studentId,
-                  String reason, String createDate, String updateDate, int status) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Record(String userEmail, Long studentId, String createDate, String updateDate, int status) {
         this.userEmail = userEmail;
         this.studentId = studentId;
-        this.reason = reason;
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.status = status;

@@ -49,9 +49,21 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/IS/MS812/Code/MakerSpace/makerspace-backend-springboot"
+    "last_opened_file_path": "D:/IS/MS812/Code/MakerSpace/makerspace-backend-springboot/src/main/java/com/makerspace/dao"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\dao" />
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\entity" />
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\utils" />
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\controller" />
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\responseModels" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IS\MS812\Code\MakerSpace\makerspace-backend-springboot\src\main\java\com\makerspace\entity" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MakerspaceBackendSpringbootApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.makerspace.MakerspaceBackendSpringbootApplication" />
