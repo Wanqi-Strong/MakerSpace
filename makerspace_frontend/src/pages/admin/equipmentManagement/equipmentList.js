@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import EquipmentInfoBox from './equipmentInfoBox'
+
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -12,18 +15,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
-// import FirstPageIcon from '@mui/icons-material/FirstPage';
-// import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-// import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-// import LastPageIcon from '@mui/icons-material/LastPage';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
 
   const handleBackButtonClick = (event) => {
     onPageChange(event, page - 1);
@@ -33,39 +28,21 @@ function TablePaginationActions(props) {
     onPageChange(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {/* {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />} */}
-      </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {/* {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />} */}
+        {theme.direction === 'rtl' ? <Icon>arrow_forward</Icon> : <Icon>arrow_back</Icon>}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {/* {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />} */}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {/* {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />} */}
+        {theme.direction === 'rtl' ? <Icon>arrow_back</Icon> : <Icon>arrow_forward</Icon>}
       </IconButton>
     </Box>
   );
@@ -75,7 +52,6 @@ TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
 };
 
 function createData(name, calories, fat) {
@@ -95,12 +71,26 @@ const rows = [
   createData('Lollipop', 392, 0.2),
   createData('Marshmallow', 318, 0),
   createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
+  createData('Oreo1', 437, 18.0),
+  createData('Oreo2', 437, 18.0),
+  createData('Oreo3', 437, 18.0),
+  createData('Oreo4', 437, 18.0),
+  createData('Oreo5', 437, 18.0),
+  createData('Oreo6', 437, 18.0),
+  createData('Oreo7', 437, 18.0),
+  createData('Oreo8', 437, 18.0),
+  createData('Oreo9', 437, 18.0),
+  createData('Oreo0', 437, 18.0),
+  createData('Oreo11', 437, 18.0),
+  createData('Oreo12', 437, 18.0),
+    createData('Oreo13', 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
 export default function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const equipmentInfoBoxRef = React.useRef();
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -108,11 +98,12 @@ export default function CustomPaginationActionsTable() {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    console.log('handleChangePage')
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  const editEquipment = (info) => {
+    console.log('editEquipment');
+    equipmentInfoBoxRef.current.show(JSON.parse(JSON.stringify(info)))
   };
 
   return (
@@ -134,7 +125,7 @@ export default function CustomPaginationActionsTable() {
                 {row.fat}
               </TableCell>
               <TableCell style={{ width: 50 }} align="right">
-                <IconButton aria-label="edit" size='small'>
+                <IconButton aria-label="edit" size='small' onClick={() => editEquipment(row)}>
                     <Icon>edit</Icon>
                 </IconButton>
               </TableCell>
@@ -145,7 +136,6 @@ export default function CustomPaginationActionsTable() {
               </TableCell>
             </TableRow>
           ))}
-
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
@@ -155,24 +145,19 @@ export default function CustomPaginationActionsTable() {
         <TableFooter>
           <TableRow>
             <TablePagination
-            //   rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[10]}
               colSpan={3}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              SelectProps={{
-                inputProps: {
-                  'aria-label': 'rows per page',
-                },
-                native: true,
-              }}
               onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}
             />
           </TableRow>
         </TableFooter>
       </Table>
+      {/*  */}
+      <EquipmentInfoBox ref={equipmentInfoBoxRef}  />
     </TableContainer>
   );
 }
