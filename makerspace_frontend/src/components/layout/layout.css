@@ -23,3 +23,30 @@ main>div{
 .layout-box section > div{
     height: 100%;
 }
+
+header{
+    background-color: #AC0454;
+    color: #fff;
+}
+
+header h3{
+    padding: 10px;
+}
+
+.dashboard-title{
+    font-weight: bold;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #e5e5e5;
+}
+.MenuItem,.MenuItem-active{
+    cursor: pointer;
+}
+.MenuItem-active{
+    background-color: #e5e5e5;
+    color: #fff;
+}
+.MenuItem >span:first-child,.MenuItem-active >span:first-child{
+    width: 80%;
+}
