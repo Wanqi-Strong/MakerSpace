@@ -1,0 +1,9 @@
+.headerBox{
+    height: 50px;
+    padding: 10px;
+    line-height: 50px;
+    text-align: right;
+}
+.tableBox{
+    padding: 10px;
+}

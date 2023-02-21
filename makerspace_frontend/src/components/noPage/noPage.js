@@ -7,7 +7,7 @@ function NoPage(){
             <div className="title">Oops!</div>
             <div>You got lost in the 404 black hole :P</div>
             <div>
-                <Link to={'/login'}>Back to home</Link>
+                <Link to={'/'}>Back to home</Link>
             </div>
         </div>
     );

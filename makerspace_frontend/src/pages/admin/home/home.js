@@ -32,11 +32,11 @@ function Home(props){
                     <div>{item.value}</div>
                     <Icon>check_box</Icon>
                 </div>
-                <div>+ {item.per*100}% from last month</div>
+                <div>+ {React.$utils.toFixed(item.per*100)}% from last month</div>
                 </div>
             </div>
         )
-      }
+    }
 
     return(
         <div className="container flex flex_ver flex_center_all">
