@@ -87,7 +87,7 @@ public class EquipmentServiceImpl implements EquipmentService {
             equipmentIdList.add(i.getEquipmentId());
         }
 
-        List<Equipment> equipments = equipmentRepository.findEquipmentByEquipmentIds(equipmentIdList);
+        Iterable<Equipment> equipments = equipmentRepository.findAllById(equipmentIdList);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
