@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/makerspace/equipment")
 public class EquipmentController {
 
     private EquipmentService equipmentService;
@@ -34,29 +34,29 @@ public class EquipmentController {
 
     @GetMapping("/ischeckedout/byuser")
     public Boolean checkoutEquipmentByUser(@RequestHeader(value="Authorization") String token,
-                                      @RequestParam Long bookId) {
+                                      @RequestParam Long equipmentId) {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
-        return equipmentService.checkoutEquipmentByUser(userEmail, bookId);
+        return equipmentService.checkoutEquipmentByUser(userEmail, equipmentId);
     }
 
     @PutMapping("/checkout/equipment")
     public Equipment checkoutEquipment (@RequestHeader(value="Authorization") String token,
-                                   @RequestParam Long bookId) throws Exception {
+                                   @RequestParam Long equipmentId) throws Exception {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
-        return equipmentService.checkoutEquipment(userEmail, bookId);
+        return equipmentService.checkoutEquipment(userEmail, equipmentId);
     }
 
-    @PutMapping("/return")
+    @PutMapping("/return/equipment")
     public void returnEquipment (@RequestHeader(value="Authorization") String token,
                             @RequestParam Long equipmentId, Long studentId) throws Exception {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         equipmentService.returnEquipment(userEmail, equipmentId, studentId);
     }
 
-    @PutMapping("/renew/loan")
+    @PutMapping("/renew/loan/equipment")
     public void renewLoan (@RequestHeader(value="Authorization") String token,
-                           @RequestParam Long bookId) throws Exception {
+                           @RequestParam Long equipmentId) throws Exception {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
-        equipmentService.renewLoan(userEmail, bookId);
+        equipmentService.renewLoan(userEmail, equipmentId);
     }
 }
