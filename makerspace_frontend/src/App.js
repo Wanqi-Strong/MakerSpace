@@ -5,6 +5,8 @@ import Home from './pages/admin/home/home';
 import EquipmentManagement from './pages/admin/equipmentManagement/equipmentManagement';
 import NoPage from './components/noPage/noPage';
 import Layout from './components/layout/layout';
+//user pages
+import UserHome from './pages/student/HomePage/UserHome';
 // public css
 import './App.css';
 import './style/flex.css'
@@ -18,6 +20,7 @@ function App() {
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/home" element={<Home />} />
         <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
+        <Route path="/user/home" element={<UserHome />} />
         {/* <Route path="/register" element={<Register />} /> */}
         <Route path="*" element={<NoPage />} />
         </Routes>
