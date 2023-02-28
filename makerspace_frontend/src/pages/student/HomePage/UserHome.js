@@ -7,9 +7,9 @@ const UserHome = () => {
         {url: 'http://localhost:3000/MakerSpace.jpg', title: 'MakerSpace'}
     ]
     const styleContainer = {
-        width: '250px',
-        height: '180px',
-        margin: '20 auto',
+        width: "250px",
+        height: "180px",
+        margin: "0 auto",
     }
 
     return (
@@ -20,6 +20,6 @@ const UserHome = () => {
             </div>
         </div>
     );
-}
+};
 
 export default UserHome;

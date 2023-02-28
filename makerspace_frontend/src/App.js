@@ -20,8 +20,8 @@ function App() {
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/home" element={<Home />} />
         <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
-        <Route path="/user/home" element={<UserHome />} />
         {/* <Route path="/register" element={<Register />} /> */}
+        <Route path="/user/home" element={<UserHome />} />
         <Route path="*" element={<NoPage />} />
         </Routes>
       </Layout>
