@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name="user")
 @JsonIgnoreProperties(allowSetters = true, value = {"userPwd","status"})
@@ -32,6 +34,9 @@ public class User {
     private String userPwd;
 
     private int status;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<Facility> facilityList;
 
     public User() {}
 
@@ -73,6 +78,14 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<Facility> getFacilityList() {
+        return facilityList;
+    }
+
+    public void setFacilityList(List<Facility> facilityList) {
+        this.facilityList = facilityList;
     }
 
     public User(String userName, String userEmail, String userPwd, int status) {
