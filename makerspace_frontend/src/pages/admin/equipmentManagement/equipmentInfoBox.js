@@ -17,7 +17,7 @@ import Select from '@mui/material/Select';
 
 const EquipmentInfoBox = React.forwardRef((props, ref) => {
   const [open, setOpen] = React.useState(false);
-  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: '', category: '' });
+  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: '', serviceType: '' });
   const [category] = React.useState(props.category)
 
   React.useImperativeHandle(ref, () => ({
@@ -34,9 +34,22 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const save = async () => {
     console.log('updated equipmentInfo')
     console.log(equipmentInfo)
-    setOpen(false);
+    let form = {
+      facility: equipmentInfo,
+      userId: React.$utils.getSessionStorage('userInfo').userId
+    };
+    const api = !form.facility.serviceId ? React.$api.serviceAdd : React.$api.serviceUpdate;
+    let res = await React.$req.post(api, form);
+    console.log(res);
+    if (res.success) {
+      setOpen(false);
+    }
   };
 
   const bindForm = (e, key) => {
@@ -75,10 +88,10 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
               <InputLabel>category</InputLabel>
               <Select
                 id="category"
-                value={equipmentInfo.category}
-                label="Age"
+                value={equipmentInfo.serviceType}
+                label="category"
                 size="small"
-                onChange={(event) => { bindForm(event, 'category') }}
+                onChange={(event) => { bindForm(event, 'serviceType') }}
               >
                 {category.map((item) =>
                   <MenuItem key={item.value}
@@ -96,7 +109,7 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={save} autoFocus>
             Save
           </Button>
         </DialogActions>

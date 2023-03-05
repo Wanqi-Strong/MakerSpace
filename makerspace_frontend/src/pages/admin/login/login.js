@@ -37,7 +37,7 @@ function Login(props){
         console.log(res);
         if(res.success){
             React.$utils.setSessionStorage("userInfo",res.data.data);
-            navigateTo("/home");
+            navigateTo("admin/home");
         }
       }
 

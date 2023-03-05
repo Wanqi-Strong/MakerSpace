@@ -92,12 +92,17 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
   React.useImperativeHandle(ref, () => ({
     add() {
       console.log('--- show add box ---')
-      editEquipment({ description: '', serviceId: '', serviceName: '', status: '', category: 1 })
+      editEquipment({ description: '', serviceId: '', serviceName: '', status: '', serviceType: 1 })
     }
   }));
 
+  React.useEffect(() => {
+    queryList()
+  }, [])
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [list,setList] = React.useState([])
   const [category] = React.useState([
     { label: 'Drones', value: 1, },
     { label: 'Virtual Reality', value: 2, },
@@ -110,7 +115,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - list.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -122,22 +127,30 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
     equipmentInfoBoxRef.current.show(JSON.parse(JSON.stringify(info)))
   };
 
+  const queryList = async () => {
+    let res = await React.$req.post(React.$api.serviceAll);
+    if (res.success) {
+      console.log(res);
+      setList(res.data.data)
+    }
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table" size='small'>
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
+            ? list.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : list
           ).map((row) => (
             <TableRow key={row.serviceId}>
-              <TableCell component="th" scope="row">
+              <TableCell style={{ width: 160 }}>
                 {row.serviceName}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell component="th" scope="row">
                 {row.description}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160 }}>
                 {row.status == 1 ? <Chip label="active" color="success" variant="outlined" /> : <Chip label="inactive" color="warning" variant="outlined" />}
               </TableCell>
               <TableCell style={{ width: 50 }} align="right">
@@ -163,7 +176,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
             <TablePagination
               rowsPerPageOptions={[10]}
               colSpan={3}
-              count={rows.length}
+              count={list.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
