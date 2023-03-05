@@ -7,3 +7,10 @@
 .tableBox{
     padding: 10px;
 }
+.formBox{
+    height: 400px;
+    width: 500px;
+}
+.inputBox{
+    margin: 10px;
+}

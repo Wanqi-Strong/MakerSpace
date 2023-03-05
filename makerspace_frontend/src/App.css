@@ -11,27 +11,3 @@ html,body,#root{
   background-color: #fff;
   box-sizing: border-box;
 }
-input{
-  line-height: 22px;
-  padding: 4px;;
-  border: 1px solid #97BF64 !important;
-  border-radius: 2px;
-}
-input:focus{
-  border: 1px solid #97BF64 !important;
-  outline: none;
-}
-.btn{
-  background-color: #fff;
-  line-height: 24px;
-  border-radius: 14px;
-  width: 100px;
-  cursor: pointer;
-}
-.btn:hover{
-  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.24),0 4px 4px 0 rgba(0,0,0,0.19);
-}
-.btn-primary{
-  border: 1px solid #97BF64;
-  color: #97BF64;
-}

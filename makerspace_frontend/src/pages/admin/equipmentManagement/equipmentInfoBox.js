@@ -4,33 +4,46 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
-const  EquipmentInfoBox = React.forwardRef((props,ref)=> {
+const EquipmentInfoBox = React.forwardRef((props, ref) => {
   const [open, setOpen] = React.useState(false);
-  const [nameInput, setNameInput] = React.useState(null);
-  const[equipmentInfo, setEquipmentInfo] = React.useState({});
+  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: '', category: '' });
+  const [category] = React.useState(props.category)
 
   React.useImperativeHandle(ref, () => ({
-
     show(info) {
-        console.log('--- show ---')
-        console.log(info)
-        setEquipmentInfo(info);
-        handleClickOpen();
+      console.log('--- show edit box ---')
+      console.log(info)
+      setEquipmentInfo({ ...info });
+      handleClickOpen();
     }
-
   }));
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    console.log('updated equipmentInfo')
+    console.log(equipmentInfo)
     setOpen(false);
   };
+
+  const bindForm = (e, key) => {
+    let form = equipmentInfo;
+    form[key] = e.target.value;
+    setEquipmentInfo({ ...form });
+  }
 
   return (
     <div>
@@ -41,16 +54,45 @@ const  EquipmentInfoBox = React.forwardRef((props,ref)=> {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Edit Equipment"}
+          {!equipmentInfo.serviceId ? "Add Equipment" : "Edit Equipment"}
         </DialogTitle>
         <DialogContent>
-        <TextField id="name" label="username" variant="outlined" required size="small"
-                            inputRef={(input) => {setNameInput( input) }} 
-                            value={equipmentInfo.name} />
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
+          <div className='formBox'>
+            <div className='flex flex_center_ver flex_space-between'>
+              <div className='inputBox'>
+                <TextField id="equipmentName" label="equipmentName" size="small" variant="standard"
+                  value={equipmentInfo.serviceName} onChange={(event) => { bindForm(event, 'serviceName') }} />
+              </div>
+              <div>
+                <FormLabel size="small">status</FormLabel>
+                <RadioGroup row name="status" size="small" value={equipmentInfo.status} onChange={(event) => { bindForm(event, 'status') }}>
+                  <FormControlLabel value="1" control={<Radio />} label="active" />
+                  <FormControlLabel value="0" control={<Radio />} label="inactive" />
+                </RadioGroup>
+              </div>
+            </div>
+            <div className='inputBox'>
+              <InputLabel>category</InputLabel>
+              <Select
+                id="category"
+                value={equipmentInfo.category}
+                label="Age"
+                size="small"
+                onChange={(event) => { bindForm(event, 'category') }}
+              >
+                {category.map((item) =>
+                  <MenuItem key={item.value}
+                    value={item.value}>{item.label}</MenuItem>
+                )}
+              </Select>
+            </div>
+            <div className='inputBox'>
+              <FormControl fullWidth variant="standard">
+                <TextField id="description" label="description" size="small" variant="standard" multiline maxRows={4}
+                  value={equipmentInfo.description} onChange={(event) => { bindForm(event, 'description') }} />
+              </FormControl>
+            </div>
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

@@ -1,22 +1,24 @@
-import './equipmentManagement.css';
-import CustomPaginationActionsTable from './equipmentList'
-
 import * as React from 'react';
 
-import Icon from '@mui/material/Icon';
+import CustomPaginationActionsTable from './equipmentList'
+import './equipmentManagement.css';
+
 import Button from '@mui/material/Button';
 
-function EquipmentManagement(props){
-    function edit(){
+function EquipmentManagement(props) {
+    const customPaginationActionsTableRef = React.useRef();
 
+    function add() {
+        customPaginationActionsTableRef.current.add();
     }
-    return(
+
+    return (
         <div className="container flex flex_ver">
             <div className='headerBox'>
-                <Button variant="contained" onClick={edit} size="small" >Add</Button>
+                <Button variant="contained" onClick={add} size="small" >Add</Button>
             </div>
             <div className='flex_1 tableBox'>
-                {CustomPaginationActionsTable()}
+                <CustomPaginationActionsTable ref={customPaginationActionsTableRef} />
             </div>
         </div>
     )

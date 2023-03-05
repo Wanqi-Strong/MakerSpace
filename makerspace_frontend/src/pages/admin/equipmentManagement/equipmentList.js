@@ -1,8 +1,8 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 import EquipmentInfoBox from './equipmentInfoBox'
 
-import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -15,6 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
+import Chip from '@mui/material/Chip';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -54,42 +55,57 @@ TablePaginationActions.propTypes = {
   page: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
+function createData(serviceId, serviceName, description, status, category) {
+  return { serviceId, serviceName, description, status, category };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo1', 437, 18.0),
-  createData('Oreo2', 437, 18.0),
-  createData('Oreo3', 437, 18.0),
-  createData('Oreo4', 437, 18.0),
-  createData('Oreo5', 437, 18.0),
-  createData('Oreo6', 437, 18.0),
-  createData('Oreo7', 437, 18.0),
-  createData('Oreo8', 437, 18.0),
-  createData('Oreo9', 437, 18.0),
-  createData('Oreo0', 437, 18.0),
-  createData('Oreo11', 437, 18.0),
-  createData('Oreo12', 437, 18.0),
-    createData('Oreo13', 437, 18.0),
+  createData(1, 'Cupcake', 305, 1, 1),
+  createData(2, 'Donut', 452, 1, 2),
+  createData(3, 'Eclair', 262, 1, 3),
+  createData(4, 'Frozen yoghurt', 159, 1, 4),
+  createData(5, 'Gingerbread', 356, 0, 5),
+  // createData('Honeycomb', 408, 3.2),
+  // createData('Ice cream sandwich', 237, 9.0),
+  // createData('Jelly Bean', 375, 0.0),
+  // createData('KitKat', 518, 26.0),
+  // createData('Lollipop', 392, 0.2),
+  // createData('Marshmallow', 318, 0),
+  // createData('Nougat', 360, 19.0),
+  // createData('Oreo1', 437, 18.0),
+  // createData('Oreo2', 437, 18.0),
+  // createData('Oreo3', 437, 18.0),
+  // createData('Oreo4', 437, 18.0),
+  // createData('Oreo5', 437, 18.0),
+  // createData('Oreo6', 437, 18.0),
+  // createData('Oreo7', 437, 18.0),
+  // createData('Oreo8', 437, 18.0),
+  // createData('Oreo9', 437, 18.0),
+  // createData('Oreo0', 437, 18.0),
+  // createData('Oreo11', 437, 18.0),
+  // createData('Oreo12', 437, 18.0),
+  // createData('Oreo13', 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export default function CustomPaginationActionsTable() {
+const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
+
+  React.useImperativeHandle(ref, () => ({
+    add() {
+      console.log('--- show add box ---')
+      editEquipment({ description: '', serviceId: '', serviceName: '', status: '', category: 1 })
+    }
+  }));
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const [category] = React.useState([
+    { label: 'Drones', value: 1, },
+    { label: 'Virtual Reality', value: 2, },
+    { label: 'Audio & Video', value: 3, },
+    { label: 'Digital Art', value: 4, },
+    { label: 'Computing', value: 5, },
+    { label: 'Sustainability', value: 6, },
+  ]);
   const equipmentInfoBoxRef = React.useRef();
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -114,24 +130,24 @@ export default function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.serviceId}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.serviceName}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
+                {row.description}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
+                {row.status == 1 ? <Chip label="active" color="success" variant="outlined" /> : <Chip label="inactive" color="warning" variant="outlined" />}
               </TableCell>
               <TableCell style={{ width: 50 }} align="right">
                 <IconButton aria-label="edit" size='small' onClick={() => editEquipment(row)}>
-                    <Icon>edit</Icon>
+                  <Icon>edit</Icon>
                 </IconButton>
               </TableCell>
               <TableCell style={{ width: 50 }} align="right">
                 <IconButton aria-label="delete" size='small'>
-                    <Icon>delete</Icon>
+                  <Icon>delete</Icon>
                 </IconButton>
               </TableCell>
             </TableRow>
@@ -157,7 +173,9 @@ export default function CustomPaginationActionsTable() {
         </TableFooter>
       </Table>
       {/*  */}
-      <EquipmentInfoBox ref={equipmentInfoBoxRef}  />
+      <EquipmentInfoBox ref={equipmentInfoBoxRef} category={category} />
     </TableContainer>
   );
-}
+})
+
+export default CustomPaginationActionsTable;
