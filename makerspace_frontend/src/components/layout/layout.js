@@ -66,7 +66,7 @@ function Layout(props){
             </header>
             <main className='flex_1'>
                 <div className="flex flex_center_ver">
-                    {Navigation()}
+                    <Navigation></Navigation>
                     <section className="flex_1">{props.children}</section>
                 </div>
             </main>

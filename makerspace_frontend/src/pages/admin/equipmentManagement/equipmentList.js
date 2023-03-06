@@ -128,7 +128,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
   };
 
   const queryList = async () => {
-    let res = await React.$req.post(React.$api.serviceAll);
+    let res = await React.$req.post(React.$api.serviceAllByType,{type:1});
     if (res.success) {
       console.log(res);
       setList(res.data.data)
@@ -151,7 +151,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
                 {row.description}
               </TableCell>
               <TableCell style={{ width: 160 }}>
-                {row.status == 1 ? <Chip label="active" color="success" variant="outlined" /> : <Chip label="inactive" color="warning" variant="outlined" />}
+                {row.active == 1 ? <Chip label="active" color="success" variant="outlined" /> : <Chip label="inactive" color="warning" variant="outlined" />}
               </TableCell>
               <TableCell style={{ width: 50 }} align="right">
                 <IconButton aria-label="edit" size='small' onClick={() => editEquipment(row)}>

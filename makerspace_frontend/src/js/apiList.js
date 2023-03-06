@@ -2,7 +2,7 @@ const apiList = {
     userLogin:"/user/login",
     userRegister:"/user/add",
     serviceAdd:"/services/add",
-    serviceAll:"/services/all",
+    serviceAllByType:"/services/allByType",
     serviceUpdate:"/services/update"
 }
 export default apiList;

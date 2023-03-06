@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `makerSpace_db`.`service` (
   `operator_id` bigint(8) NOT NULL,
   `service_name` varchar(40) COLLATE utf8_bin NOT NULL,
   `category` int(1) DEFAULT NULL COMMENT 'when service_type equals to 1, this attribute identify equipment category',
+  `active` int(1) NOT NULL DEFAULT '1' COMMENT '1 means available for student, 0 means unavailable.',
     PRIMARY KEY (`service_id`),
     FOREIGN KEY (`operator_id`)
     REFERENCES `makerSpace_db`.`user` (`user_id`)

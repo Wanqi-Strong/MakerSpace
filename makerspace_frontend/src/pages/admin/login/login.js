@@ -52,7 +52,7 @@ function Login(props){
             <div className="container flex flex_ver flex_center_all">
                     <Box component="form" noValidate autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>   
                         <div>
-                            <TextField id="username" label="username" variant="outlined" required size="small"
+                            <TextField id="username" label="user email" variant="outlined" required size="small"
                             inputRef={(input) => {setNameInput( input) }} 
                             value={name} onChange={(event) => {setName(event.target.value);}} />
                         </div>

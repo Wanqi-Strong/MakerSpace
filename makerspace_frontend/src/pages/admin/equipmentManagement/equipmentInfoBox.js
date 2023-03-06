@@ -17,7 +17,7 @@ import Select from '@mui/material/Select';
 
 const EquipmentInfoBox = React.forwardRef((props, ref) => {
   const [open, setOpen] = React.useState(false);
-  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: '', serviceType: '' });
+  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2,active:1 });
   const [category] = React.useState(props.category)
 
   React.useImperativeHandle(ref, () => ({
@@ -77,8 +77,8 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
                   value={equipmentInfo.serviceName} onChange={(event) => { bindForm(event, 'serviceName') }} />
               </div>
               <div>
-                <FormLabel size="small">status</FormLabel>
-                <RadioGroup row name="status" size="small" value={equipmentInfo.status} onChange={(event) => { bindForm(event, 'status') }}>
+                <FormLabel size="small">active</FormLabel>
+                <RadioGroup row name="active" size="small" value={equipmentInfo.active} onChange={(event) => { bindForm(event, 'active') }}>
                   <FormControlLabel value="1" control={<Radio />} label="active" />
                   <FormControlLabel value="0" control={<Radio />} label="inactive" />
                 </RadioGroup>
@@ -88,10 +88,10 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
               <InputLabel>category</InputLabel>
               <Select
                 id="category"
-                value={equipmentInfo.serviceType}
+                value={equipmentInfo.category}
                 label="category"
                 size="small"
-                onChange={(event) => { bindForm(event, 'serviceType') }}
+                onChange={(event) => { bindForm(event, 'category') }}
               >
                 {category.map((item) =>
                   <MenuItem key={item.value}
