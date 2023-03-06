@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import CustomPaginationActionsTable from './equipmentList'
+import CustomPaginationActionsTable from './component/equipmentList'
 import './equipmentManagement.css';
 
 import Button from '@mui/material/Button';
