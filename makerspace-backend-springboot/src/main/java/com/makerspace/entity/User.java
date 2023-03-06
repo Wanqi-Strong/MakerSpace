@@ -11,6 +11,11 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+/**
+ * @author Wanqi Chen
+ * User class refers to data in user table, which is for admin platform.
+ */
+
 @Entity
 @Table(name="user")
 @JsonIgnoreProperties(allowSetters = true, value = {"userPwd","status"})

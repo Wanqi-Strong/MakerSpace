@@ -2,6 +2,12 @@ package com.makerspace.dto;
 
 import com.makerspace.entity.Facility;
 
+/**
+ * @author Wanqi Chen
+ * FacilityDto class help handle parameters for FacilityController.
+ * The format of request is {userId:"",facility:{}}
+ */
+
 public class FacilityDto {
 
     private Facility facility;

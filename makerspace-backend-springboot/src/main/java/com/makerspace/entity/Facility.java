@@ -4,10 +4,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Timestamp;
+
+/**
+ * @author Wanqi Chen
+ * Facility class refers to data in services table.
+ * equipment has service_type equals to 1.
+ */
 
 @Entity
 @Table(name="services")
@@ -23,7 +28,11 @@ public class Facility {
 
     private int status;
 
+    private int category;
+
     private int serviceType;
+
+    private int active;
 
     private String description;
 
@@ -113,18 +122,35 @@ public class Facility {
         this.user = user;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Facility{" +
                 "serviceId=" + serviceId +
                 ", serviceName='" + serviceName + '\'' +
                 ", status=" + status +
+                ", category=" + category +
                 ", serviceType=" + serviceType +
+                ", active=" + active +
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", user=" + user +
                 '}';
     }
 }

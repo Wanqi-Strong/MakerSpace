@@ -9,6 +9,11 @@ import com.makerspace.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Wanqi Chen
+ * FacilityServiceImpl class apply deal with data from database.
+ */
+
 @Service
 public class FacilityServiceImpl implements FacilityService {
 
@@ -24,10 +29,15 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     @Override
-    public Facility addFacility(Facility facility,long userId) {
+    public Iterable<Facility> getAllFacilityByType(int type) {
+        return facilityRepository.findByServiceType(type);
+    }
+
+    @Override
+    public Facility addFacility(Facility facility, long userId) {
         // find user
         User user = userRepository.findById(userId).get();
-        if(user.getStatus() == 0 || user == null) {
+        if (user.getStatus() == 0 || user == null) {
             throw new MakerSpaceException("user does not exist");
         }
         // build facility
@@ -38,31 +48,31 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     @Override
-    public Facility updateFacility(Facility facility,long userId) {
+    public Facility updateFacility(Facility facility, long userId) {
         // find user
         User user = userRepository.findById(userId).get();
-        if(user.getStatus() == 0 || user == null) {
+        if (user.getStatus() == 0 || user == null) {
             throw new MakerSpaceException("user does not exist");
         }
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
-        if(current == null){
+        if (current == null) {
             throw new MakerSpaceException("service does not exist");
-        }else {
+        } else {
             facility.setUser(user);
             facilityRepository.save(facility);
-            return  facilityRepository.findByServiceId(facility.getServiceId());
+            return facilityRepository.findByServiceId(facility.getServiceId());
         }
     }
 
     @Override
     public Facility deleteFacility(Facility facility) {
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
-        if(current == null){
+        if (current == null) {
             throw new MakerSpaceException("service does not exist");
-        }else {
+        } else {
             facility.setStatus(0);
             facilityRepository.save(facility);
-            return  facilityRepository.findByServiceId(facility.getServiceId());
+            return facilityRepository.findByServiceId(facility.getServiceId());
         }
     }
 }
