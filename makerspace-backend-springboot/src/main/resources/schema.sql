@@ -38,18 +38,19 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `makerSpace_db`.`service` (
-  `service_id` INT NOT NULL AUTO_INCREMENT,
-  `service_name` VARCHAR(100) NOT NULL,
-  `service_type` INT(1) NOT NULL,
-  `description` VARCHAR(40) NULL,
-  `status` INT(1) NOT NULL DEFAULT 1,
-  `picture` BLOB NULL,
-  `create_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `start_date` TIMESTAMP NULL,
-  `end_date` TIMESTAMP NULL,
-  `location` VARCHAR(100) NULL,
-  `operator_id` BIGINT(8) NOT NULL,
+  `service_id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_type` int(1) NOT NULL COMMENT '1 means equipment, 2 means workshop, 3 means studio',
+  `description` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '1 means available, 0 means unavailable as logical deleted',
+  `picture` blob,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `start_date` timestamp NULL DEFAULT NULL COMMENT 'when service_type equals to 2, this attribute identify workshop start date',
+  `end_date` timestamp NULL DEFAULT NULL COMMENT 'when service_type equals to 2, this attribute identify workshop end date',
+  `location` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT 'when service_type equals to 2, this attribute identify workshop location',
+  `operator_id` bigint(8) NOT NULL,
+  `service_name` varchar(40) COLLATE utf8_bin NOT NULL,
+  `category` int(1) DEFAULT NULL COMMENT 'when service_type equals to 1, this attribute identify equipment category',
     PRIMARY KEY (`service_id`),
     FOREIGN KEY (`operator_id`)
     REFERENCES `makerSpace_db`.`user` (`user_id`)
