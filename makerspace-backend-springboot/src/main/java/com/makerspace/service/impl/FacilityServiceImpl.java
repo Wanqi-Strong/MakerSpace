@@ -23,6 +23,14 @@ public class FacilityServiceImpl implements FacilityService {
     @Autowired
     private UserRepository userRepository;
 
+    private User checkOperator(long userId) {
+        User user = userRepository.findById(userId).get();
+        if (user.getStatus() == 0 || user == null) {
+            throw new MakerSpaceException("user does not exist");
+        }
+        return user;
+    }
+
     @Override
     public Iterable<Facility> getAllFacility() {
         return facilityRepository.findAll();
@@ -35,12 +43,7 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Facility addFacility(Facility facility, long userId) {
-        // find user
-        User user = userRepository.findById(userId).get();
-        if (user.getStatus() == 0 || user == null) {
-            throw new MakerSpaceException("user does not exist");
-        }
-        // build facility
+        User user = checkOperator(userId);
         facility.setStatus(1);
         facility.setUser(user);
         facilityRepository.save(facility);
@@ -49,11 +52,7 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Facility updateFacility(Facility facility, long userId) {
-        // find user
-        User user = userRepository.findById(userId).get();
-        if (user.getStatus() == 0 || user == null) {
-            throw new MakerSpaceException("user does not exist");
-        }
+        User user = checkOperator(userId);
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
@@ -66,11 +65,13 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Facility deleteFacility(Facility facility, long userId) {
+        User user = checkOperator(userId);
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
         } else {
             facility.setStatus(0);
+            facility.setUser(user);
             facilityRepository.save(facility);
             return facilityRepository.findByServiceId(facility.getServiceId());
         }
