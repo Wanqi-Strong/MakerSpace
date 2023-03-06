@@ -30,7 +30,7 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Iterable<Facility> getAllFacilityByType(int type) {
-        return facilityRepository.findByServiceType(type);
+        return facilityRepository.findByServiceTypeAndStatus(type, 1);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     @Override
-    public Facility deleteFacility(Facility facility) {
+    public Facility deleteFacility(Facility facility, long userId) {
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
         if (current == null) {
             throw new MakerSpaceException("service does not exist");

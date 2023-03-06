@@ -17,6 +17,6 @@ public interface FacilityService {
 
     public Facility updateFacility(Facility facility,long userId);
 
-    public Facility deleteFacility(Facility facility);
+    public Facility deleteFacility(Facility facility, long userId);
 
 }

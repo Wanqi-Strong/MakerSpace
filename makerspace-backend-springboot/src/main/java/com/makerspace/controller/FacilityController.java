@@ -63,4 +63,15 @@ public class FacilityController {
     public Result updateFacility(@RequestBody FacilityDto facilityDto) {
         return Result.success(facilityService.updateFacility(facilityDto.getFacility(), facilityDto.getUserId()));
     }
+
+    /**
+     * delete facility logically
+     *
+     * @param facilityDto {facility info,userId}
+     * @return Result one facility
+     */
+    @PostMapping("/delete")
+    public Result deleteFacility(@RequestBody FacilityDto facilityDto) {
+        return Result.success(facilityService.deleteFacility(facilityDto.getFacility(), facilityDto.getUserId()));
+    }
 }
