@@ -2,10 +2,13 @@ package com.makerspace.controller;
 
 import com.makerspace.base.Result;
 import com.makerspace.dto.FacilityDto;
+import com.makerspace.entity.Facility;
 import com.makerspace.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -23,12 +26,15 @@ public class FacilityController {
     /**
      * add facility
      *
-     * @param facilityDto {facility info,userId}
+     * @param userId   user id
+     * @param picture  picture of facility
+     * @param facility facility info
      * @return Result one facility
      */
+
     @PostMapping("/add")
-    public Result addFacility(@RequestBody FacilityDto facilityDto) {
-        return Result.success(facilityService.addFacility(facilityDto.getFacility(), facilityDto.getUserId()));
+    public Result addFacility(@RequestPart("userId") String userId, @RequestPart("picture") MultipartFile picture, @RequestPart("facility") Facility facility) throws IOException {
+        return Result.success(facilityService.addFacility(facility, Long.parseLong(userId), picture));
     }
 
     /**
@@ -56,12 +62,14 @@ public class FacilityController {
     /**
      * update facility
      *
-     * @param facilityDto {facility info,userId}
+     * @param userId   user id
+     * @param picture  picture of facility
+     * @param facility facility info
      * @return Result one facility
      */
     @PostMapping("/update")
-    public Result updateFacility(@RequestBody FacilityDto facilityDto) {
-        return Result.success(facilityService.updateFacility(facilityDto.getFacility(), facilityDto.getUserId()));
+    public Result updateFacility(@RequestPart("userId") String userId, @RequestPart("picture") MultipartFile picture, @RequestPart("facility") Facility facility) throws IOException {
+        return Result.success(facilityService.updateFacility(facility, Long.parseLong(userId), picture));
     }
 
     /**

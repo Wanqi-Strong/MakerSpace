@@ -8,6 +8,9 @@ import com.makerspace.entity.User;
 import com.makerspace.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author Wanqi Chen
@@ -42,21 +45,28 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     @Override
-    public Facility addFacility(Facility facility, long userId) {
+    public Facility addFacility(Facility facility, long userId, MultipartFile file) throws IOException {
         User user = checkOperator(userId);
         facility.setStatus(1);
         facility.setUser(user);
+        // handle file
+        if (file != null) {
+            facility.setPicture(file.getBytes());
+        }
         facilityRepository.save(facility);
         return facilityRepository.findByServiceName(facility.getServiceName());
     }
 
     @Override
-    public Facility updateFacility(Facility facility, long userId) {
+    public Facility updateFacility(Facility facility, long userId, MultipartFile file) throws IOException {
         User user = checkOperator(userId);
         Facility current = facilityRepository.findByServiceId(facility.getServiceId());
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
         } else {
+            if (file != null) {
+                facility.setPicture(file.getBytes());
+            }
             facility.setUser(user);
             facilityRepository.save(facility);
             return facilityRepository.findByServiceId(facility.getServiceId());

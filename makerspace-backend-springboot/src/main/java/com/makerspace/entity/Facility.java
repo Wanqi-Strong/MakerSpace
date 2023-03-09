@@ -42,6 +42,8 @@ public class Facility {
 
     private Timestamp endDate;
 
+    private byte[] picture;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "operator_id", nullable = false,referencedColumnName = "userId")
     @JsonBackReference
@@ -136,6 +138,14 @@ public class Facility {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 
     @Override

@@ -21,7 +21,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -66,7 +65,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
   React.useImperativeHandle(ref, () => ({
     add() {
       console.log('--- show add box ---')
-      editEquipment({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2,active:1 })
+      editEquipment({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2, active: 1, picture: null })
     }
   }));
 

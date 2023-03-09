@@ -1,6 +1,7 @@
 package com.makerspace.dto;
 
 import com.makerspace.entity.Facility;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Wanqi Chen
@@ -13,6 +14,8 @@ public class FacilityDto {
     private Facility facility;
 
     private long userId;
+
+    private MultipartFile file;
 
     public FacilityDto() {
     }
@@ -31,5 +34,13 @@ public class FacilityDto {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }

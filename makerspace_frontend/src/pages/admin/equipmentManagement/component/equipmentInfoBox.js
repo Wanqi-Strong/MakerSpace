@@ -14,21 +14,37 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import Icon from '@mui/material/Icon';
 
 const EquipmentInfoBox = React.forwardRef((props, ref) => {
   const [open, setOpen] = React.useState(false);
-  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2,active:1 });
+  const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2, active: 1, picture: null });
   const [category] = React.useState(props.category)
-  const {refreshList} = props;
+  const [picture, setPicture] = React.useState("");
+  const [isAdd, setIsAdd] = React.useState(false);
+  const { refreshList } = props;
 
   React.useImperativeHandle(ref, () => ({
     show(info) {
-      console.log('--- show edit box ---')
-      console.log(info)
-      setEquipmentInfo({ ...info });
-      handleClickOpen();
+      initData(info)
     }
   }));
+
+  const initData = (info) => {
+    console.log('--- show edit box ---')
+    console.log(info)
+    if (info.picture != null) {
+      setIsAdd(false)
+      let url = "data:image/png;base64," + info.picture;
+      setPicture(url)
+    } else {
+      setIsAdd(true)
+      setPicture("")
+    }
+    setEquipmentInfo({ ...info });
+    handleClickOpen();
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,10 +59,17 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
     console.log(equipmentInfo)
     let form = {
       facility: equipmentInfo,
-      userId: React.$utils.getSessionStorage('userInfo').userId
+      userId: React.$utils.getSessionStorage('userInfo').userId,
+      picture: picture
     };
+    let param = new FormData();
+    let equipment = JSON.stringify(equipmentInfo);
+    param.append('userId', form.userId)
+    param.append('picture', picture)
+    param.append('facility', new Blob([equipment], { type: "application/json" }))
+    console.log(param);
     const api = !form.facility.serviceId ? React.$api.serviceAdd : React.$api.serviceUpdate;
-    let res = await React.$req.post(api, form);
+    let res = await React.$req.post(api, param, "multipart/form-data");
     console.log(res);
     if (res.success) {
       setOpen(false);
@@ -58,6 +81,16 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
     let form = equipmentInfo;
     form[key] = e.target.value;
     setEquipmentInfo({ ...form });
+  }
+
+  const uploadPic = (e) => {
+    if (e != null) {
+      setPicture(e.target.files[0]);
+      setIsAdd(true);
+    } else {
+      setPicture("")
+      setIsAdd(true);
+    }
   }
 
   return (
@@ -107,11 +140,31 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
                   value={equipmentInfo.description} onChange={(event) => { bindForm(event, 'description') }} />
               </FormControl>
             </div>
+            <div className='inputBox'>
+              <InputLabel>picture</InputLabel>
+              {picture && (
+                <div>
+                  <img
+                    alt="not found"
+                    width={"200px"}
+                    height={"150px"}
+                    src={isAdd ? URL.createObjectURL(picture) : picture}
+                  />
+                  <IconButton aria-label="delete" size='small' onClick={() => { uploadPic(null) }}>
+                    <Icon>delete</Icon>
+                  </IconButton>
+                </div>
+              )}
+              <IconButton aria-label="upload" size='small' component="label">
+                <Icon>photo_camera</Icon>
+                <input hidden accept="image/*" multiple type="file" onChange={(event) => { uploadPic(event) }} />
+              </IconButton>
+            </div>
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={save} autoFocus>
+          <Button onClick={handleClose} size="small" variant="outlined">Cancel</Button>
+          <Button onClick={save} autoFocus size="small" variant="contained">
             Save
           </Button>
         </DialogActions>
