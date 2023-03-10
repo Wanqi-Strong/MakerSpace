@@ -64,6 +64,7 @@ public class FacilityServiceImpl implements FacilityService {
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
         } else {
+            // handle file
             if (file != null) {
                 facility.setPicture(file.getBytes());
             }
