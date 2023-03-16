@@ -1,24 +1,21 @@
-import PicSlider from "./components/PicSlider";
+import ImageSlider from './components/ImageSlider/ImageSlider';
+import { ImagesData } from './components/ImageSlider/ImagesData';
+import Query from './components/Query/Query'
 
 const UserHome = () => {
-    const pics = [
-        {url: 'http://localhost:3000/MakerSpaceHome.jpg', title: 'MakerSpaceHome'},
-        {url: 'http://localhost:3000/MakerSpaceInfo.jpg', title: 'MakerSpaceInfo'},
-        {url: 'http://localhost:3000/MakerSpace.jpg', title: 'MakerSpace'}
-    ]
-    const styleContainer = {
-        width: "250px",
-        height: "180px",
-        margin: "0 auto",
-    }
 
     return (
-        <div>
-            <h1>Welcome to MakerSpace</h1>
-            <div style={styleContainer}>
-                <PicSlider pics={pics} />
+        <>
+            <div>
+                <h1>Welcome</h1>
+                <div className='container mt-5'>
+                    <div className="styleContainer flex flex_center_ver flex_space-between">
+                        <ImageSlider slides={ImagesData} />
+                        <Query />
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

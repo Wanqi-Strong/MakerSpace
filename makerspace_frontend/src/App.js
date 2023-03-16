@@ -16,7 +16,8 @@ function App() {
       <BrowserRouter>
       <Layout>
         <Routes>
-        <Route path="/" element={<Login />} exact />
+        {/* <Route path="/" element={<Login />} exact /> */}
+        <Route path="/" element={<UserHome />} exact />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/home" element={<Home />} />
         <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
