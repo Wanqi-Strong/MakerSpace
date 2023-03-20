@@ -22,6 +22,14 @@ public class Result<T> {
         return result;
     }
 
+    public static <T> Result<T> success(T data,String message) {
+        Result<T> result = new Result<T>();
+        result.setCode(ResultCode.APP_SUCCESS.getCode());
+        result.setMessage(message);
+        result.setData(data);
+        return result;
+    }
+
     public static <T> Result<T> error(int code, String message) {
         return new Result<T>(code, message);
     }

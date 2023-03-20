@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Wanqi Chen
@@ -48,6 +49,10 @@ public class Facility {
     @JoinColumn(name = "operator_id", nullable = false,referencedColumnName = "userId")
     @JsonBackReference
     private User user;
+
+    @OneToMany(mappedBy = "facility",fetch = FetchType.LAZY)
+    private List<Record> recordList;
+
 
     public Facility() {
     }
@@ -146,6 +151,14 @@ public class Facility {
 
     public void setPicture(byte[] picture) {
         this.picture = picture;
+    }
+
+    public List<Record> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<Record> recordList) {
+        this.recordList = recordList;
     }
 
     @Override
