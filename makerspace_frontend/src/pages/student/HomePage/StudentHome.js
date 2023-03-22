@@ -1,9 +1,9 @@
+import {ImagesData} from './components/ImageSlider/ImagesData'
 import ImageSlider from './components/ImageSlider/ImageSlider';
-import { ImagesData } from './components/ImageSlider/ImagesData';
 import Query from './components/Query/Query'
 import FunctionBox from './components/FunctionsBox/FunctionBox'
 
-const UserHome = () => {
+const StudentHome = () => {
 
     const myStyle = { height: '50%', width: '100%' }
     return (
@@ -20,4 +20,4 @@ const UserHome = () => {
     );
 };
 
-export default UserHome;
+export default StudentHome;

@@ -12,11 +12,11 @@ const Query = () => {
                         <div>
                             <h2>Eileen Kennedy</h2>
                             <h4>Library Digital Experience Developer </h4>
-                            <p>MakerSpace, 3D printing, Technology, Web design and UX
+                            <p> MakerSpace, 3D printing, Technology, Web design & UX</p> 
                                 <p>Twitter @eileenMaKe</p>
                                 <p>Contact: T 091 492549</p>
                                 <p>Email: eileen.kennedy@universityofgalway.ie</p>
-                            </p>
+                            
                         </div>
                     </div>
                 </div>

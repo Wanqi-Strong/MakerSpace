@@ -1,18 +1,11 @@
 export const ImagesData = [
-    {
-      image:
-        'https://images.unsplash.com/photo-1501446529957-6226bd447c46?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1489&q=80'
-    },
-    {
-      image:
-        'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
-    },
-    {
-      image:
-        'https://images.unsplash.com/photo-1475189778702-5ec9941484ae?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80'
-    },
-    {
-      image:
-        'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
-    }
-  ];
+  {
+    image: 'https://www.proviz.ie/wp-content/uploads/2016/04/1.jpg'
+  },
+  {
+    image: 'https://www.proviz.ie/wp-content/uploads/2016/04/2-1.jpg'
+  },
+  {
+    image: 'https://scontent-dub4-1.xx.fbcdn.net/v/t31.18172-8/12976835_10153929199851294_3354353129633819418_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=4xtAzc3QlZYAX9X11_X&_nc_ht=scontent-dub4-1.xx&oh=00_AfAL5E1xZT96PEdLSn6kIy_-GNx-Vp9s5kclF88O_du_PA&oe=6442BC32'
+  }
+];

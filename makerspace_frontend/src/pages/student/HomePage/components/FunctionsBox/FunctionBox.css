@@ -1,0 +1,9 @@
+* {
+  margin: 10px;
+  padding: 10px;
+}
+
+.MuiButtonBase-root:disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }

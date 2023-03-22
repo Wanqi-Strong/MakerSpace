@@ -1,7 +1,7 @@
 import './ImageSlider.css';
 import React, { useState } from 'react';
-import { ImagesData } from './ImagesData';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { ImagesData } from './ImagesData'
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
 const ImageSlider = ({ slides }) => {
     const [current, setCurrent] = useState(0);
@@ -22,18 +22,24 @@ const ImageSlider = ({ slides }) => {
     return (
         <div className='container flex flex_ver sliderBox'>
             <div className='slider'>
-                <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-                <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+                <FaAngleDoubleLeft className='left-arrow' onClick={prevSlide} />
+                <FaAngleDoubleRight className='right-arrow' onClick={nextSlide} />
                 {ImagesData.map((slide, index) => {
                     return (
-                        <div
-                            className={index === current ? 'slide active' : 'slide'}
-                            key={index}
-                        >
-                            {index === current && (
-                                <img src={slide.image} alt='travel image' className='image' />
-                            )}
-                        </div>
+                        <>
+                            <div
+                                className={index === current ? 'slide active' : 'slide'}
+                                key={index}
+                            >
+                                {index === current && (
+                                    <img src={slide.image} alt='MakerSpace' className='image' />
+                                )}
+                            </div>
+                            <div class='text-on-image'>
+                                <h1 style={{color: 'white', margin:'40px'}}>WELCOME TO MAKERSPACE</h1>
+                                <p style={{color: 'white', margin:'60px', padding: '20px'}}>PCs, equipment, workshops, and more!</p>
+                            </div>
+                        </>
                     );
                 })}
             </div>
