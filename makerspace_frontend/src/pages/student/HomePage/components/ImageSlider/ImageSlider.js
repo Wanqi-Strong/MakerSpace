@@ -20,9 +20,8 @@ const ImageSlider = ({ slides }) => {
     }
 
     return (
-        <div className='container mt-5'>
-        <div className='container flex flex_ver  flex_center_all sliderBox'>
-            <section className='slider'>
+        <div className='container flex flex_ver sliderBox'>
+            <div className='slider'>
                 <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
                 <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
                 {ImagesData.map((slide, index) => {
@@ -37,8 +36,7 @@ const ImageSlider = ({ slides }) => {
                         </div>
                     );
                 })}
-            </section>
-        </div>
+            </div>
         </div>
     );
 };

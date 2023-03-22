@@ -1,19 +1,22 @@
 import './Query.css'
+import profie from './image/emk.png';
 
 const Query = () => {
     return (
         <div className='cardContainer'>
-            <div className='Box'>
+            <div className='container'>
                 <h1>Any Question?</h1>
                 <div className='container flex'>
-                    <div className='imgBox col-image-left'>
-                        <div className='textBox'>
-                        <h2>Eileen Kennedy</h2>
-                        <p>Library Digital Experience Developer
-                            MakerSpace, 3D printing, Technology, Web design and UX
-                            Twitter @eileenMaKe
-                            T 091 492549 Email: eileen.kennedy@universityofgalway.ie
-                        </p>
+                    <div className='flex flex_left_ver'>
+                        <img src={profie} width={200} height={200}></img>
+                        <div>
+                            <h2>Eileen Kennedy</h2>
+                            <h4>Library Digital Experience Developer </h4>
+                            <p>MakerSpace, 3D printing, Technology, Web design and UX
+                                <p>Twitter @eileenMaKe</p>
+                                <p>Contact: T 091 492549</p>
+                                <p>Email: eileen.kennedy@universityofgalway.ie</p>
+                            </p>
                         </div>
                     </div>
                 </div>

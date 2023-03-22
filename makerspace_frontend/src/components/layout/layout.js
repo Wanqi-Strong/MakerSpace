@@ -61,7 +61,7 @@ function Layout(props){
       }
     return(
         <div className="container flex flex_ver flex_center_all layout-box">
-            <header>
+            <header className='flex flex_center_ver'>
                 <h3>MakerSpace</h3>
             </header>
             <main className='flex_1'>
