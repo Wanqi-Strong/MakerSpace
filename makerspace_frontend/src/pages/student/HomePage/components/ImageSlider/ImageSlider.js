@@ -26,20 +26,17 @@ const ImageSlider = ({ slides }) => {
                 <FaAngleDoubleRight className='right-arrow' onClick={nextSlide} />
                 {ImagesData.map((slide, index) => {
                     return (
-                        <>
-                            <div
-                                className={index === current ? 'slide active' : 'slide'}
-                                key={index}
-                            >
+                        <div key={slide.id}>
+                            <div className={index === current ? 'slide active' : 'slide'} >
                                 {index === current && (
                                     <img src={slide.image} alt='MakerSpace' className='image' />
                                 )}
                             </div>
-                            <div class='text-on-image'>
-                                <h1 style={{color: 'white', margin:'40px'}}>WELCOME TO MAKERSPACE</h1>
-                                <p style={{color: 'white', margin:'60px', padding: '20px'}}>PCs, equipment, workshops, and more!</p>
+                            <div className='text-on-image'>
+                                <h1 style={{ color: 'white', margin: '40px' }}>WELCOME TO MAKERSPACE</h1>
+                                <p style={{ color: 'white', margin: '60px', padding: '20px' }}>PCs, equipment, workshops, and more!</p>
                             </div>
-                        </>
+                        </div>
                     );
                 })}
             </div>

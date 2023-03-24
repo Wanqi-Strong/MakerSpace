@@ -7,7 +7,7 @@ const StudentHome = () => {
 
     const myStyle = { height: '50%', width: '100%' }
     return (
-        <>
+        <div className='container'>
             <h1>Welcome to MakerSpace</h1>
             <div className="flex flex_center_ver flex_space-around" style={myStyle}>
                 <ImageSlider slides={ImagesData} />
@@ -16,7 +16,7 @@ const StudentHome = () => {
             <div>
                 <FunctionBox />
             </div>
-        </>
+        </div>
     );
 };
 
