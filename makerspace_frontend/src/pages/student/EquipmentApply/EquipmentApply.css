@@ -1,0 +1,38 @@
+.applyBox {
+    overflow: auto;
+}
+
+.applyBox::-webkit-scrollbar {
+    width: 4px;
+}
+
+.applyBox::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.applyBox::-webkit-scrollbar-thumb {
+    background: #2196f3;
+    border-radius: 25px;
+}
+
+.searchBox {
+    height: 50px;
+}
+
+.listItem {
+    cursor: pointer;
+    width: 30%;
+    height: 150px;
+    text-align: center;
+    margin: 10px;
+}
+
+.listItem img {
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.listBox {
+    max-height: 0;
+}

@@ -69,7 +69,6 @@ public class FacilityController {
      */
     @PostMapping("/update")
     public Result updateFacility(@RequestPart("userId") String userId, @RequestPart("picture") MultipartFile picture, @RequestPart("facility") Facility facility) throws IOException {
-        System.out.println("hei");
         return Result.success(facilityService.updateFacility(facility, Long.parseLong(userId), picture));
     }
 

@@ -51,6 +51,7 @@ public class Facility {
     private User user;
 
     @OneToMany(mappedBy = "facility",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Record> recordList;
 
 
