@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './EquipmentApply.css'
 
+import ApplyForm from './component/ApplyForm/ApplyForm'
+
+
+
 function EquipmentApply(props) {
 
     const [equipmentList, setEquipmentList] = useState([{ serviceName: 1, serviceId: 1 }]);
@@ -38,6 +42,7 @@ function EquipmentApply(props) {
 
     return (
         <div className='applyBox flex flex_ver'>
+            <ApplyForm />
             <div className='searchBox'></div>
             <BuildList />
         </div>

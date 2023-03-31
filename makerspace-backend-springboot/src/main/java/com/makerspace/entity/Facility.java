@@ -1,6 +1,7 @@
 package com.makerspace.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -47,7 +48,7 @@ public class Facility {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "operator_id", nullable = false,referencedColumnName = "userId")
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "facility",fetch = FetchType.LAZY)

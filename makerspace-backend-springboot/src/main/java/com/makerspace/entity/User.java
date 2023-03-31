@@ -1,5 +1,6 @@
 package com.makerspace.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -40,8 +41,9 @@ public class User {
 
     private int status;
 
-//    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-//    private List<Facility> facilityList;
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Facility> facilityList;
 
     public User() {}
 

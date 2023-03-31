@@ -1,5 +1,7 @@
 package com.makerspace.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,7 +34,6 @@ public class Record {
                 ", state=" + state +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", facility=" + facility +
                 '}';
     }
 
