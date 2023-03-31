@@ -8,21 +8,26 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import './FunctionBox.css'
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 const images = [
     {
         url: image1,
         title: 'Book PCs & Equipment In-Studio',
         width: '33.33%',
+        link: ''
     },
     {
         url: image2,
         title: 'Checkout PCs & Equipment ',
         width: '33.33%',
+        link: '/student/equipmentApply'
     },
     {
         url: image3,
         title: 'Workshop & Learn',
         width: '33.34%',
+        link: ''
     },
 ];
 
@@ -92,6 +97,16 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 export default function FunctionBox() {
+    const navigate = useNavigate();
+
+    function navigateTo(e, image) {
+        try {
+            navigate(image.link);
+        } catch (e) {
+            throw e;
+        }
+    }
+
     return (
         <div className='functionBox flex_space-between'>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
@@ -102,6 +117,7 @@ export default function FunctionBox() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={(e) => navigateTo(e, image)}
                     >
                         <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
                         <ImageBackdrop className="MuiImageBackdrop-root" />
