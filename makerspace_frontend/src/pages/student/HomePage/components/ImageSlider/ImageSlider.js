@@ -20,7 +20,7 @@ const ImageSlider = ({ slides }) => {
     }
 
     return (
-        <div className='container flex flex_ver sliderBox'>
+        <div className='flex flex_ver sliderBox'>
             <div className='slider'>
                 <FaAngleDoubleLeft className='left-arrow' onClick={prevSlide} />
                 <FaAngleDoubleRight className='right-arrow' onClick={nextSlide} />
@@ -31,10 +31,6 @@ const ImageSlider = ({ slides }) => {
                                 {index === current && (
                                     <img src={slide.image} alt='MakerSpace' className='image' />
                                 )}
-                            </div>
-                            <div className='text-on-image'>
-                                <h1 style={{ color: 'white', margin: '40px' }}>WELCOME TO MAKERSPACE</h1>
-                                <p style={{ color: 'white', margin: '60px', padding: '20px' }}>PCs, equipment, workshops, and more!</p>
                             </div>
                         </div>
                     );

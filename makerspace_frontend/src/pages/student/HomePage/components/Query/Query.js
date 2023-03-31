@@ -4,7 +4,6 @@ import profie from './image/emk.png';
 const Query = () => {
     return (
         <div className='cardContainer'>
-            <div className='container'>
                 <h1>Any Question?</h1>
                 <div className='container flex'>
                     <div className='flex flex_left_ver'>
@@ -18,7 +17,6 @@ const Query = () => {
                                 <p>Email: eileen.kennedy@universityofgalway.ie</p> 
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     )

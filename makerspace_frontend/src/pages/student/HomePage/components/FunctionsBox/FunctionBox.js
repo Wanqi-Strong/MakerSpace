@@ -28,7 +28,7 @@ const images = [
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
-    height: 300,
+    height: 150,
     [theme.breakpoints.down('sm')]: {
         width: '100% !important', // Overrides inline-style
         height: 200,
@@ -59,7 +59,7 @@ const ImageSrc = styled('span')({
 
 const Image = styled('span')(({ theme }) => ({
     position: 'absolute',
-    padding:10,
+    padding: 10,
     left: 0,
     right: 0,
     top: 0,
@@ -93,8 +93,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 export default function FunctionBox() {
     return (
-        <div className='container'>
-            <div className='flex_space-between'>
+        <div className='functionBox flex_space-between'>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
                 {images.map((image) => (
                     <ImageButton
@@ -125,7 +124,6 @@ export default function FunctionBox() {
                     </ImageButton>
                 ))}
             </Box>
-            </div>
         </div>
     )
 }

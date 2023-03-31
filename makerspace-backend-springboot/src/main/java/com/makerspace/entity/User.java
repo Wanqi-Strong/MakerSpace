@@ -40,8 +40,8 @@ public class User {
 
     private int status;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    private List<Facility> facilityList;
+//    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+//    private List<Facility> facilityList;
 
     public User() {}
 
@@ -85,13 +85,13 @@ public class User {
         this.status = status;
     }
 
-    public List<Facility> getFacilityList() {
-        return facilityList;
-    }
-
-    public void setFacilityList(List<Facility> facilityList) {
-        this.facilityList = facilityList;
-    }
+//    public List<Facility> getFacilityList() {
+//        return facilityList;
+//    }
+//
+//    public void setFacilityList(List<Facility> facilityList) {
+//        this.facilityList = facilityList;
+//    }
 
     public User(String userName, String userEmail, String userPwd, int status) {
         this.userName = userName;
