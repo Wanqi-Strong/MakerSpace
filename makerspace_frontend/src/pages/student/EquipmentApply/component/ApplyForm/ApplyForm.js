@@ -5,7 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import CustomAlert from './../../../../../components/alter/alter'
-function ApplyForm() {
+import './ApplyForm.css'
+function ApplyForm({ serviceId }) {
 
     const [firstNameInput, setFirstNameInput] = useState(null);
     const [lastNameInput, setLastNameInput] = useState(null);
@@ -21,6 +22,7 @@ function ApplyForm() {
     const [studentId, setStudentId] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
     const [alertTitle, setAlertTitle] = useState('');
+    const [severity, setSeverity] = useState('success');
 
     async function handleSubmit() {
         let form = {
@@ -64,19 +66,27 @@ function ApplyForm() {
         }
         console.log(form);
         let submitForm = {
-            serviceId: "4",
+            serviceId: serviceId,
             record: form
         }
         let res = await React.$req.post(React.$api.reservationAdd, submitForm);
-        console.log(res);
         if (res.success) {
-            setAlertTitle('reservation result');
-            alter.current.showAlert(res.data.data);
+            if (res.data.data) {
+                setSeverity('error');
+                setAlertTitle('Reservation Fail');
+                alter.current.showAlert(res.data.data);
+            } else {
+                setSeverity('success');
+                setAlertTitle('Reservation Success');
+                alter.current.showAlert('Your application is submitted');
+            }
+
         }
     }
 
     return (
-        <div>
+        <div className="reservationBox flex flex_center_ver">
+            <div className="calendar">there will be a calendar</div>
             <Box component="form" noValidate autoComplete="off" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
                 <div>
                     <TextField id="firstName" label="first name" variant="outlined" required size="small"
@@ -107,7 +117,7 @@ function ApplyForm() {
                     <Button variant="contained" onClick={handleSubmit} size="small" >Submit</Button>
                 </div>
             </Box>
-            <CustomAlert ref={alter} severity='warning' alertTitle={alertTitle}></CustomAlert>
+            <CustomAlert ref={alter} severity={severity} alertTitle={alertTitle}></CustomAlert>
         </div>
     )
 

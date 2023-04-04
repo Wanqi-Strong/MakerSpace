@@ -1,4 +1,4 @@
-class commonUtils{
+class commonUtils {
 
     // set sessionStorage in browser
     setSessionStorage(key, val) {
@@ -22,8 +22,46 @@ class commonUtils{
     }
 
     // format number using fixed-point notation
-    toFixed(x,length = 2) {
+    toFixed(x, length = 2) {
         return Number.parseFloat(x).toFixed(length);
-      }
+    }
+
+    // check data type
+    getDataType(data) {
+        let typeString = "";
+        try {
+            typeString = Object.prototype.toString.call(data).slice(8, -1);
+        } catch (e) {
+            throw new Error(`get type of data failed ：${e.message}`);
+        }
+        if (typeString === "Number" && isNaN(Number(data))) typeString = "NaN";
+        return typeString;
+    };
+
+    // check is data empty
+    isEmpty(data) {
+        let result = false;
+        switch (this.getDataType(data)) {
+            case "Null":
+            case "Undefined":
+                result = true;
+                break;
+            case "String":
+                result = data === "";
+                break;
+            case "Object":
+            case "Array":
+                result = Object.keys(data).length === 0;
+                break;
+            case "Set":
+            case "Map":
+                result = data.size === 0;
+                break;
+            default:
+                result = false;
+                break;
+        }
+        return result;
+    };
 }
 export default new commonUtils();

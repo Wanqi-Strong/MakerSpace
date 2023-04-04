@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './EquipmentApply.css'
 
-import ApplyForm from './component/ApplyForm/ApplyForm'
+import EquipmentDetails from './component/EquipmentDetails/EquipmentDetails'
 
 
 
 function EquipmentApply(props) {
 
-    const [equipmentList, setEquipmentList] = useState([{ serviceName: 1, serviceId: 1 }]);
+    const [equipmentList, setEquipmentList] = useState([]);
+    const [selectedItem, setSelectedItem] = useState({});
 
     useEffect(() => {
         queryEquipmentList()
@@ -21,6 +22,10 @@ function EquipmentApply(props) {
         }
     }
 
+    function resetSelect() {
+        setSelectedItem({});
+    }
+
     function BuildList() {
         return (
             <div className='listBox'>
@@ -28,7 +33,7 @@ function EquipmentApply(props) {
                     {
                         equipmentList.length && equipmentList.map((item) => {
                             return (
-                                <div className='listItem flex flex_ver' key={item.serviceId}>
+                                <div className='listItem flex flex_ver' key={item.serviceId} onClick={() => { setSelectedItem(item) }}>
                                     <img src={item.picture ? "data:image/png;base64," + item.picture : ''} alt={item.serviceId} />
                                     <span>{item.serviceName}</span>
                                 </div>
@@ -42,9 +47,8 @@ function EquipmentApply(props) {
 
     return (
         <div className='applyBox flex flex_ver'>
-            <ApplyForm />
-            <div className='searchBox'></div>
-            <BuildList />
+            {!React.$utils.isEmpty(selectedItem) ? <EquipmentDetails equipmentInfo={selectedItem} resetSelect={resetSelect} /> : null}
+            {React.$utils.isEmpty(selectedItem) ? <BuildList /> : null}
         </div>
     )
 }

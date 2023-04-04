@@ -1,0 +1,19 @@
+.detailBox {
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+}
+
+.detailBox>div {
+    width: 50%;
+    height: 100%;
+}
+
+.detailBox>div:first-child {
+    text-align: center;
+}
+
+.detailBox img {
+    width: 60%;
+    height: 80%;
+}

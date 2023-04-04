@@ -1,0 +1,10 @@
+.calendar {
+    width: 75%;
+    height: 150px;
+    border: 1px solid #f00;
+}
+
+.reservationBox {
+    width: 100%;
+    padding: 10px;
+}
