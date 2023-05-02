@@ -1,10 +1,7 @@
 package com.makerspace.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Timestamp;

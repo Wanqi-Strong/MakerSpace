@@ -1,3 +1,4 @@
+import moment from "moment";
 class commonUtils {
 
     // set sessionStorage in browser
@@ -62,6 +63,25 @@ class commonUtils {
                 break;
         }
         return result;
+    };
+
+    // get moment object
+    getMoment() {
+        return moment;
+    }
+
+    // get a week based on one day
+    getOneDayInWeekAllDate(_moment = moment(), format = "YYYY-MM-DD") {
+        let arr = [];
+        for (let i = 1; i < 8; i++) {
+            arr.push(_moment.isoWeekday(i).format(format));
+        }
+        return arr;
+    }
+
+    // get today
+    getTodayDate(format = "YYYY-MM-DD") {
+        return moment().format(format);
     };
 }
 export default new commonUtils();

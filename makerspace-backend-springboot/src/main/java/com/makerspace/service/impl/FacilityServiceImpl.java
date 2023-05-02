@@ -39,9 +39,9 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     private boolean checkHasRecord(long serviceId){
-        if(recordRepository.test(serviceId,1).size()!=0){
+        if(recordRepository.findRecordBySidAndState(serviceId,1).size()!=0){
             return true;
-        }else return recordRepository.test(serviceId, 2) .size()!=0;
+        }else return recordRepository.findRecordBySidAndState(serviceId, 2) .size()!=0;
     }
 
     @Override

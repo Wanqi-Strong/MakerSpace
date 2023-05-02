@@ -2,7 +2,6 @@ package com.makerspace.controller;
 
 import com.makerspace.base.Result;
 import com.makerspace.dto.RecordDto;
-import com.makerspace.entity.Record;
 import com.makerspace.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +24,10 @@ public class RecordController {
     @PostMapping("/add")
     public Result addRecord(@RequestBody RecordDto recordDto){
         return Result.success(recordService.addRecord(recordDto.getRecord(),recordDto.getServiceId()));
+    }
+
+    @PostMapping("/allByIdAndTime")
+    public Result<Iterable> getRecordByIdAndTime(@RequestBody RecordDto recordDto){
+        return Result.success(recordService.getRecordBySidAndDate(recordDto.getServiceId(),recordDto.getStartDate(),recordDto.getEndDate()));
     }
 }

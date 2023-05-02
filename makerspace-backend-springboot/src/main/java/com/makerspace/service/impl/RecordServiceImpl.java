@@ -11,6 +11,7 @@ import com.makerspace.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -79,5 +80,10 @@ public class RecordServiceImpl implements RecordService {
             recordRepository.save(record);
         }
         return recordRepository.findByRecordId(record.getRecordId());
+    }
+
+    @Override
+    public Iterable<Record> getRecordBySidAndDate(long serviceId, Timestamp start, Timestamp end){
+        return recordRepository.findRecordBySidAndDate(serviceId,start,end);
     }
 }
