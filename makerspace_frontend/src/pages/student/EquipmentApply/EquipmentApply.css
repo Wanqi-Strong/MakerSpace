@@ -2,6 +2,10 @@
     overflow: auto;
 }
 
+.applyBox h3{
+    padding: 10px;
+}
+
 .applyBox::-webkit-scrollbar {
     width: 4px;
     height: 4px;

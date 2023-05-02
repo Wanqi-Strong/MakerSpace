@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
+
 import CustomAlert from './../../../../../components/alter/alter'
 import './ApplyForm.css'
 function ApplyForm({ serviceId }) {
@@ -91,7 +94,18 @@ function ApplyForm({ serviceId }) {
 
     return (
         <div className="reservationBox flex flex_center_ver">
-            <div className="calendar">there will be a calendar</div>
+            <div className="calendar">
+                <FullCalendar
+                    height='100%'
+                    plugins={[timeGridPlugin]}
+                    initialView= 'timeGridWeek'
+                    weekends={false}
+                    allDaySlot= {false}
+                    slotMinTime= "10:45:00"
+                    slotMaxTime= "22:00:00"
+                    slotDuration="00:15:00"
+                />
+            </div>
             <Box component="form" noValidate autoComplete="off" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
                 <div>
                     <TextField id="firstName" label="first name" variant="outlined" required size="small"
