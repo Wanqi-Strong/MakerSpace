@@ -1,6 +1,7 @@
 package com.makerspace.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "record")
 @DynamicUpdate
+@JsonInclude(JsonInclude.Include.ALWAYS)
 public class Record {
     public Record(){}
 

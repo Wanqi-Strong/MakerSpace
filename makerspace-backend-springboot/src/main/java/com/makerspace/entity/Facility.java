@@ -2,6 +2,7 @@ package com.makerspace.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @Entity
 @Table(name="services")
 @DynamicUpdate
+@JsonInclude(JsonInclude.Include.ALWAYS)
 public class Facility {
 
     @Id
@@ -53,6 +55,7 @@ public class Facility {
 
     @OneToMany(mappedBy = "facility",fetch = FetchType.LAZY)
     @JsonBackReference
+    @JsonIgnore
     private List<Record> recordList;
 
 
