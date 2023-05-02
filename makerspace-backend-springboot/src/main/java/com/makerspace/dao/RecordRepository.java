@@ -19,4 +19,7 @@ public interface RecordRepository extends CrudRepository<Record, Long> {
             "or (r.endDate >=:startDate and r.endDate <= :endDate))"
     )
     List<Record> findRecordByTimeRange(@Param("startDate")Timestamp startDate,@Param("endDate")Timestamp endDate);
+
+    @Query(value = "select * from record where service_id = ?1 and state = ?2",nativeQuery = true)
+    List<Record> test(Long serviceId,int state);
 }

@@ -17,7 +17,11 @@ import Select from '@mui/material/Select';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
+import CustomAlert from './../../../../components/alter/alter'
+
 const EquipmentInfoBox = React.forwardRef((props, ref) => {
+
+  const alter = React.useRef();
   const [open, setOpen] = React.useState(false);
   const [equipmentInfo, setEquipmentInfo] = React.useState({ description: '', serviceId: '', serviceName: '', status: 1, serviceType: 1, category: 2, active: 1, picture: null });
   const [category] = React.useState(props.category)
@@ -109,6 +113,9 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
       resetData();
       setOpen(false);
       refreshList();
+    } else {
+      setOpen(false);
+      alter.current.showAlert(res.message);
     }
   }
 
@@ -203,6 +210,7 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <CustomAlert ref={alter} severity={'error'} alertTitle={'error'}></CustomAlert>
     </div>
   );
 })

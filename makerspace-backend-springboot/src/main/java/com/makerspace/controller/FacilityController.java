@@ -48,16 +48,22 @@ public class FacilityController {
     }
 
     /**
-     * query all facility by serviceType
+     * query all facility by serviceType and active
      *
-     * @param params serviceType
+     * @param params serviceType, active(default null, for both 1 and 0)
      * @return Result list of all facility
      */
     @PostMapping("/allByType")
     public Result<Iterable> getAllFacilityByType(@RequestBody Map params) {
         int type = (int) params.get("type");
-        return Result.success(facilityService.getAllFacilityByType(type));
+        int active = 1;
+        if(params.get("active") == null){
+            return Result.success(facilityService.getAllFacilityByType(type));
+        }else{
+            return Result.success(facilityService.getAllFacilityByTypeAndActive(type,active));
+        }
     }
+
 
     /**
      * update facility

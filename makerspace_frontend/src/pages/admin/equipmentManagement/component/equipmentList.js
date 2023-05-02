@@ -22,6 +22,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
+import CustomAlert from './../../../../components/alter/alter'
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -74,6 +76,8 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
     console.log('queryList')
   }, [])
 
+  const alter = React.useRef();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [list, setList] = React.useState([])
@@ -106,7 +110,13 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
     let res = await React.$req.post(React.$api.serviceAllByType, { type: 1 });
     if (res.success) {
       setList(res.data.data)
+    } else {
+      showError(res.message);
     }
+  }
+
+  const showError = (res) => {
+    alter.current.showAlert(res.message);
   }
 
   const showDeleteBox = (row) => {
@@ -165,7 +175,8 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
       </Table>
       {/*  */}
       <EquipmentInfoBox ref={equipmentInfoBoxRef} category={category} refreshList={queryList} />
-      <DeleteBox ref={DeleteBoxRef} refreshList={queryList} />
+      <DeleteBox ref={DeleteBoxRef} refreshList={queryList} showError={showError} />
+      <CustomAlert ref={alter} severity={'error'} alertTitle={'error'}></CustomAlert>
     </TableContainer>
   );
 })
@@ -197,6 +208,9 @@ const DeleteBox = React.forwardRef((props, ref) => {
     if (res.success) {
       handleClose();
       props.refreshList();
+    } else {
+      handleClose();
+      props.showError(res);
     }
   };
 

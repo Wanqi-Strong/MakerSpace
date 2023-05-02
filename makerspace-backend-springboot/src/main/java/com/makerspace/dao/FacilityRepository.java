@@ -32,18 +32,27 @@ public interface FacilityRepository extends CrudRepository<Facility, Integer> {
 
 
     /**
-     * query one service by type
+     * query services by type
      *
-     * @param serviceType the name of service
+     * @param serviceType the type of service
      * @return Facility one service
      */
     List<Facility> findByServiceType(int serviceType);
 
     /**
-     * query one service by type with status
+     * query services by type with status
      *
-     * @param serviceType the name of service
+     * @param serviceType the type of service
      * @return Facility one service
      */
     List<Facility> findByServiceTypeAndStatus(int serviceType, int status);
+
+    /**
+     * query one service by type with status
+     *
+     * @param serviceType the type of service
+     * @param active the active of service
+     * @return Facility one service
+     */
+    List<Facility> findByServiceTypeAndActiveAndStatus(int serviceType,int active,int status);
 }

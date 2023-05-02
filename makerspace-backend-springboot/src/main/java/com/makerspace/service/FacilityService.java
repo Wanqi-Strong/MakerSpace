@@ -22,4 +22,6 @@ public interface FacilityService {
 
     public Facility deleteFacility(Facility facility, long userId);
 
+    public Iterable<Facility> getAllFacilityByTypeAndActive(int type,int active);
+
 }

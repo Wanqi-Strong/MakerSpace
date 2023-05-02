@@ -2,6 +2,7 @@ package com.makerspace.service.impl;
 
 import com.makerspace.base.MakerSpaceException;
 import com.makerspace.dao.FacilityRepository;
+import com.makerspace.dao.RecordRepository;
 import com.makerspace.dao.UserRepository;
 import com.makerspace.entity.Facility;
 import com.makerspace.entity.User;
@@ -24,6 +25,9 @@ public class FacilityServiceImpl implements FacilityService {
     private FacilityRepository facilityRepository;
 
     @Autowired
+    private RecordRepository recordRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     private User checkOperator(long userId) {
@@ -34,6 +38,12 @@ public class FacilityServiceImpl implements FacilityService {
         return user;
     }
 
+    private boolean checkHasRecord(long serviceId){
+        if(recordRepository.test(serviceId,1)!=null){
+            return true;
+        }else return recordRepository.test(serviceId, 2) != null;
+    }
+
     @Override
     public Iterable<Facility> getAllFacility() {
         return facilityRepository.findAll();
@@ -42,6 +52,11 @@ public class FacilityServiceImpl implements FacilityService {
     @Override
     public Iterable<Facility> getAllFacilityByType(int type) {
         return facilityRepository.findByServiceTypeAndStatus(type, 1);
+    }
+
+    @Override
+    public Iterable<Facility> getAllFacilityByTypeAndActive(int type,int active) {
+        return facilityRepository.findByServiceTypeAndActiveAndStatus(type, active,1);
     }
 
     @Override
@@ -64,6 +79,10 @@ public class FacilityServiceImpl implements FacilityService {
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
         } else {
+            // check if this service still has active record
+            if(checkHasRecord(facility.getServiceId())){
+                throw new MakerSpaceException("service still has usage");
+            }
             // handle file
             if (file != null) {
                 facility.setPicture(file.getBytes());
@@ -81,6 +100,10 @@ public class FacilityServiceImpl implements FacilityService {
         if (current == null) {
             throw new MakerSpaceException("service does not exist");
         } else {
+            // check if this service still has active record
+            if(checkHasRecord(facility.getServiceId())){
+                throw new MakerSpaceException("service still has usage");
+            }
             facility.setStatus(0);
             facility.setUser(user);
             facilityRepository.save(facility);

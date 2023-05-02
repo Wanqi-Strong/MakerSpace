@@ -182,4 +182,5 @@ public class Record {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
+
 }
