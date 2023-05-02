@@ -5,6 +5,7 @@ const apiList = {
     serviceAllByType: "/services/allByType",
     serviceUpdate: "/services/update",
     serviceDelete: "/services/delete",
-    reservationAdd: "record/add"
+    reservationAdd: "/record/add",
+    reservationAll: '/record/all'
 }
 export default apiList;

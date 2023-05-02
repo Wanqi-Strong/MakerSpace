@@ -11,7 +11,7 @@ function Layout(props) {
     const location = useLocation();
 
     function Navigation(props) {
-        if (location.pathname.includes('admin')) {
+        if (location.pathname.includes('admin') && !location.pathname.includes('login')) {
             return (
                 <nav>
                     <div className='dashboard-title'>Dashboard</div>
@@ -27,7 +27,7 @@ function Layout(props) {
     function Menu(props) {
         const [menuList] = useState([
             { name: 'Home', url: '/admin/home', id: 0 },
-            { name: 'Booking Equipment', url: '/admin/equipmentrecord', id: 1 },
+            { name: 'Studio Booking', url: '/admin/studioBooking', id: 1 },
             { name: 'Booking Workshop', url: '/admin/workshoprecord', id: 2 },
             { name: 'Report', url: '/admin/report', id: 3 },
             { name: 'Equipment Management', url: '/admin/equipmentManagement', id: 4 },
