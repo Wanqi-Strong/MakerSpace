@@ -24,6 +24,11 @@ function ApplyForm({ serviceId }) {
     const [alertTitle, setAlertTitle] = useState('');
     const [severity, setSeverity] = useState('success');
 
+    function showWarning() {
+        setAlertTitle('incomplete form');
+        setSeverity('warning');
+    }
+
     async function handleSubmit() {
         let form = {
             firstName: firstName,
@@ -37,31 +42,31 @@ function ApplyForm({ serviceId }) {
         if (!form.firstName) {
             firstNameInput.focus();
             alter.current.showAlert('please input firstName');
-            setAlertTitle('incomplete form');
+            showWarning();
             return;
         }
         if (!form.lastName) {
             lastNameInput.focus();
             alter.current.showAlert('please input lastName');
-            setAlertTitle('incomplete form');
+            showWarning();
             return;
         }
         if (!form.reason) {
             reasonInput.focus();
             alter.current.showAlert('please input reason');
-            setAlertTitle('incomplete form');
+            showWarning();
             return;
         }
         if (!form.studentId) {
             studentIdInput.focus();
             alter.current.showAlert('please input studentId');
-            setAlertTitle('incomplete form');
+            showWarning();
             return;
         }
         if (!form.studentEmail) {
             studentEmailInput.focus();
             alter.current.showAlert('please input studentEmail');
-            setAlertTitle('incomplete form');
+            showWarning();
             return;
         }
         console.log(form);
@@ -99,11 +104,6 @@ function ApplyForm({ serviceId }) {
                         value={lastName} onChange={(event) => { setLastName(event.target.value); }} />
                 </div>
                 <div>
-                    <TextField id="reason" label="reason" variant="outlined" required size="small"
-                        inputRef={(input) => { setReasonInput(input) }}
-                        value={reason} onChange={(event) => { setReason(event.target.value); }} />
-                </div>
-                <div>
                     <TextField id="studentId" label="studentId" variant="outlined" required size="small"
                         inputRef={(input) => { setStudentIdInput(input) }}
                         value={studentId} onChange={(event) => { setStudentId(event.target.value); }} />
@@ -112,6 +112,11 @@ function ApplyForm({ serviceId }) {
                     <TextField id="studentEmail" label="studentEmail" variant="outlined" required size="small"
                         inputRef={(input) => { setStudentEmailInput(input) }}
                         value={studentEmail} onChange={(event) => { setStudentEmail(event.target.value); }} />
+                </div>
+                <div>
+                    <TextField id="reason" label="reason" variant="outlined" required size="small"
+                        inputRef={(input) => { setReasonInput(input) }}
+                        value={reason} onChange={(event) => { setReason(event.target.value); }} />
                 </div>
                 <div className='center-box'>
                     <Button variant="contained" onClick={handleSubmit} size="small" >Submit</Button>

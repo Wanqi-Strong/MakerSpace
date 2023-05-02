@@ -1,7 +1,11 @@
+.detailBoxContainer {
+    padding: 10px;
+}
+
 .detailBox {
     height: 200px;
     width: 100%;
-    padding: 10px;
+
 }
 
 .detailBox>div {
@@ -16,4 +20,5 @@
 .detailBox img {
     width: 60%;
     height: 80%;
+    border-radius: 5px;
 }

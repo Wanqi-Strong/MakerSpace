@@ -3,7 +3,7 @@ import ApplyForm from './../ApplyForm/ApplyForm'
 import Button from '@mui/material/Button';
 function EquipmentDetails({ equipmentInfo, resetSelect }) {
     return (
-        <div>
+        <div className='detailBoxContainer'>
             <Button variant="outlined" size="small" onClick={resetSelect}>Back</Button>
             {/* equipment details */}
             <div className="detailBox flex flex_center_ver">

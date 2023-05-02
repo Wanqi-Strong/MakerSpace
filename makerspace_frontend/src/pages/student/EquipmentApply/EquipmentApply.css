@@ -1,10 +1,10 @@
 .applyBox {
     overflow: auto;
-    padding: 10px;
 }
 
 .applyBox::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
 }
 
 .applyBox::-webkit-scrollbar-track {
@@ -23,7 +23,7 @@
 .listItem {
     cursor: pointer;
     width: 30%;
-    height: 150px;
+    height: 180px;
     text-align: center;
     margin: 10px;
 }
@@ -32,6 +32,18 @@
     height: 80%;
     width: 80%;
     margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+}
+
+.listItem span{
+    background-color: #AC0454;
+    width: 80%;
+    margin: 0 auto;
+    height: 30px;
+    color: #fff;
+    font-weight: bold;
+    line-height: 30px;
+    border-radius: 0 0 5px 5px;
 }
 
 .listBox {
