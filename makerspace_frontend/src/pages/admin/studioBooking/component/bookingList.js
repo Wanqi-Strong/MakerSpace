@@ -141,7 +141,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
                             </TableCell>
                             <TableCell style={{ width: 50 }} align="right">
                                 <IconButton aria-label="delete" size='small' onClick={() => showDeleteBox(row)}>
-                                    <Icon>delete</Icon>
+                                    <Icon>done</Icon>
                                 </IconButton>
                             </TableCell>
                         </TableRow>
@@ -191,6 +191,8 @@ const DeleteBox = React.forwardRef((props, ref) => {
     };
 
     const confirmDelete = async () => {
+        handleClose();
+        return;
         let form = {
             facility: equipmentInfo,
             userId: React.$utils.getSessionStorage('userInfo').userId
@@ -213,7 +215,7 @@ const DeleteBox = React.forwardRef((props, ref) => {
         >
             <DialogContent>
                 <DialogContentText>
-                    Please confirm deletion of {equipmentInfo.serviceName}
+                    Please confirm completion of booking {equipmentInfo.recordId}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
