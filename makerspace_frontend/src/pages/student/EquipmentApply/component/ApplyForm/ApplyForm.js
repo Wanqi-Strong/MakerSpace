@@ -123,7 +123,7 @@ function ApplyForm({ serviceId }) {
         }
         let res = await React.$req.post(React.$api.reservationAdd, submitForm);
         if (res.success) {
-            if (res.data.data) {
+            if (res.data.code != 1) {
                 setSeverity('error');
                 setAlertTitle('Reservation Fail');
                 alter.current.showAlert(res.data.data);
