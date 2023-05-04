@@ -15,13 +15,13 @@ const images = [
         url: image1,
         title: 'Book PCs & Equipment In-Studio',
         width: '33.33%',
-        link: ''
+        link: '/student/equipmentApply'
     },
     {
         url: image2,
         title: 'Checkout PCs & Equipment ',
         width: '33.33%',
-        link: '/student/equipmentApply'
+        link: ''
     },
     {
         url: image3,
