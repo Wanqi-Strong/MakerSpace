@@ -13,4 +13,6 @@ public interface RecordService {
     public Record updateRecord(Record record, long userId);
 
     public Iterable<Record> getRecordBySidAndDate(long serviceId, Timestamp start,Timestamp end);
+
+    public Iterable<Record> getAllRecordByType(String serviceType,String name,String id);
 }

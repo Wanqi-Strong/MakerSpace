@@ -63,14 +63,13 @@ TablePaginationActions.propTypes = {
 const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
-        add() {
-            console.log('--- show add box ---')
+        queryListClick(name, id) {
+            queryList(name, id);
         }
     }));
 
     React.useEffect(() => {
         queryList()
-        console.log('queryList')
     }, [])
 
     const alter = React.useRef();
@@ -89,8 +88,8 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
         console.log('handleChangePage')
     };
 
-    const queryList = async () => {
-        let res = await React.$req.post(React.$api.reservationAll, { type: 1 });
+    const queryList = async (name = "", id = "") => {
+        let res = await React.$req.post(React.$api.reservationByType, { type: 3, name: name, id: id });
         if (res.success) {
             setList(res.data.data)
         } else {
@@ -134,7 +133,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
                                 {row.facility.serviceName}
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {row.startDate + '-' + row.endDate}
+                                {row.startDate + '~' + row.endDate}
                             </TableCell>
                             <TableCell style={{ width: 90 }}>
                                 {row.state == 1 ? <Chip label="pending" color="warning" variant="outlined" /> : <Chip label="processing" color="success" variant="outlined" />}

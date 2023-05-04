@@ -4,10 +4,9 @@ import com.makerspace.base.Result;
 import com.makerspace.dto.RecordDto;
 import com.makerspace.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("record")
@@ -19,6 +18,11 @@ public class RecordController {
     @PostMapping("/all")
     public Result<Iterable> getAllRecord(){
         return Result.success(recordService.getAllRecord());
+    }
+
+    @PostMapping("/allByType")
+    public Result<Iterable> getAllRecordByType(@RequestBody Map<String, String> requestParams){
+        return Result.success(recordService.getAllRecordByType(requestParams.get("type"),requestParams.get("name"),requestParams.get("id")));
     }
 
     @PostMapping("/add")

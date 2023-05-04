@@ -13,6 +13,8 @@ import java.util.List;
 public interface RecordRepository extends CrudRepository<Record, Long> {
     Record findByRecordId(Long recordId);
 
+    List<Record> findAllByOrderByCreateDate();
+
     @Query("select r from Record r where " +
             "((r.startDate  >= :startDate and r.startDate <= :endDate) " +
             "or (r.startDate <= :startDate and r.endDate >=:endDate)" +

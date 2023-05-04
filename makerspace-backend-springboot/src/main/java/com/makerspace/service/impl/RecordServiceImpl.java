@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecordServiceImpl implements RecordService {
@@ -35,7 +36,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Iterable<Record> getAllRecord() {
-        return recordRepository.findAll();
+        return recordRepository.findAllByOrderByCreateDate();
     }
 
     @Override
@@ -85,5 +86,23 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public Iterable<Record> getRecordBySidAndDate(long serviceId, Timestamp start, Timestamp end){
         return recordRepository.findRecordBySidAndDate(serviceId,start,end);
+    }
+
+    @Override
+    public Iterable<Record> getAllRecordByType(String type,String name,String id){
+        List<Record> list = (List<Record>) getAllRecord();
+        if(name.equals("")){
+            if(id.equals("")){
+                return list.stream().filter(r->r.getFacility().getServiceType()==Integer.parseInt(type)).collect(Collectors.toList());
+            }else {
+                return list.stream().filter(r-> r.getFacility().getServiceType() == Integer.parseInt(type) && r.getStudentId().toString().contains(id)).collect(Collectors.toList());
+            }
+        }else{
+            if(id.equals("")){
+                return list.stream().filter(r-> r.getFacility().getServiceType() == Integer.parseInt(type) && r.getFacility().getServiceName().contains(name)).collect(Collectors.toList());
+            }else {
+                return list.stream().filter(r-> r.getFacility().getServiceType() == Integer.parseInt(type) && r.getFacility().getServiceName().contains(name)&&r.getStudentId().toString().contains(id)).collect(Collectors.toList());
+            }
+        }
     }
 }
