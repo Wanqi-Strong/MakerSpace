@@ -160,20 +160,29 @@ const EquipmentInfoBox = React.forwardRef((props, ref) => {
                 </RadioGroup>
               </div>
             </div>
-            <div className='inputBox'>
-              <InputLabel>category</InputLabel>
-              <Select
-                id="category"
-                value={equipmentInfo.category}
-                label="category"
-                size="small"
-                onChange={(event) => { bindForm(event, 'category') }}
-              >
-                {category.map((item) =>
-                  <MenuItem key={item.value}
-                    value={item.value}>{item.label}</MenuItem>
-                )}
-              </Select>
+            <div className='flex flex_center_ver flex_space-between'>
+              <div className='inputBox'>
+                <InputLabel>category</InputLabel>
+                <Select
+                  id="category"
+                  value={equipmentInfo.category}
+                  label="category"
+                  size="small"
+                  onChange={(event) => { bindForm(event, 'category') }}
+                >
+                  {category.map((item) =>
+                    <MenuItem key={item.value}
+                      value={item.value}>{item.label}</MenuItem>
+                  )}
+                </Select>
+              </div>
+              <div>
+                <FormLabel size="small">type</FormLabel>
+                <RadioGroup row name="active" size="small" value={equipmentInfo.serviceType} onChange={(event) => { bindForm(event, 'serviceType') }}>
+                  <FormControlLabel value="1" control={<Radio />} label="checkout" />
+                  <FormControlLabel value="3" control={<Radio />} label="in-studio" />
+                </RadioGroup>
+              </div>
             </div>
             <div className='inputBox'>
               <FormControl fullWidth variant="standard">

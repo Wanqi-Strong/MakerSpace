@@ -1,7 +1,9 @@
 package com.makerspace.dao;
 
 import com.makerspace.entity.Facility;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,12 +34,12 @@ public interface FacilityRepository extends CrudRepository<Facility, Integer> {
 
 
     /**
-     * query services by type
+     * query equipment only, the status is default as 1
      *
-     * @param serviceType the type of service
-     * @return Facility one service
+     * @return Facility equipment list
      */
-    List<Facility> findByServiceType(int serviceType);
+    @Query("select f from Facility f where (f.serviceType = 1 or f.serviceType = 3) and f.status = 1")
+    List<Facility> findAllEquipment();
 
     /**
      * query services by type with status

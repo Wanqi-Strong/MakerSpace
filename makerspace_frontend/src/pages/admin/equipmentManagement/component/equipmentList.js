@@ -107,7 +107,7 @@ const CustomPaginationActionsTable = React.forwardRef((props, ref) => {
   };
 
   const queryList = async () => {
-    let res = await React.$req.post(React.$api.serviceAllByType, { type: 1 });
+    let res = await React.$req.post(React.$api.serviceAllByType, { type: -1 });
     if (res.success) {
       setList(res.data.data)
     } else {

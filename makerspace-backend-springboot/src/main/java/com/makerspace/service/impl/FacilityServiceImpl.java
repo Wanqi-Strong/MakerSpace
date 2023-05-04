@@ -51,7 +51,13 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Iterable<Facility> getAllFacilityByType(int type) {
-        return facilityRepository.findByServiceTypeAndStatus(type, 1);
+        // type == -1, query all equipment
+        if(type == -1){
+            return facilityRepository.findAllEquipment();
+        }else{
+            return facilityRepository.findByServiceTypeAndStatus(type, 1);
+        }
+
     }
 
     @Override
