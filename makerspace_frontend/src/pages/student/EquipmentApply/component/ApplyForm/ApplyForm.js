@@ -29,6 +29,9 @@ function ApplyForm({ serviceId }) {
     const [reason, setReason] = useState('');
     const [studentId, setStudentId] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
+    const [bookStart, setBookStart] = useState('');
+    const [bookEnd, setBookEnd] = useState('');
+
     const [alertTitle, setAlertTitle] = useState('');
     const [severity, setSeverity] = useState('success');
 
@@ -48,14 +51,44 @@ function ApplyForm({ serviceId }) {
         const date2 = dateRange[4];
         setStartDate(date1);
         setEndDate(date2);
-        queryRecordList(date1, date2);
+        //queryRecordList(date1, date2);
+    }
+
+    // check the selected time is between any unavailable slot
+    function checkBetween(start, end) {
+        const item = recordList.find(i =>
+            (i.startDate >= start && i.endDate <= end) || (i.startDate <= start && i.endDate >= end) || (i.startDate >= start && i.endDate <= end)
+        )
+        return React.$utils.isEmpty(item);
+    }
+
+    // check the selected time is bigger than now or unavailable
+    function checkAllow(info) {
+        let moment = React.$utils.getMoment();
+        let start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
+        let end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
+        let now = new Date();
+        let valid = info.start > now && info.end > now && checkBetween(start, end);
+        if (valid) {
+            setBookStart(start);
+            setBookEnd(end)
+        }
+        return valid;
+    }
+
+    // click prev or next button
+    function updateList(info) {
+        let moment = React.$utils.getMoment();
+        let start = moment(info.start).format("YYYY-MM-DD");
+        let end = moment(info.start).day(5).format("YYYY-MM-DD");
+        setStartDate(start);
+        setEndDate(end);
+        queryRecordList(start, end);
     }
 
     async function queryRecordList(startDate, endDate) {
         let form = { startDate: startDate + ' 00:00:00', endDate: endDate + ' 23:59:59', serviceId: serviceId, };
-        console.log(form);
         let res = await React.$req.post(React.$api.reservationByService, form);
-        console.log(res);
         if (res.success) {
             if (res.data.data && res.data.data.length) {
                 res.data.data.forEach((item) => {
@@ -68,7 +101,6 @@ function ApplyForm({ serviceId }) {
                 })
                 setRecordList(res.data.data)
             }
-            console.log(recordList)
         } else {
             setSeverity('error');
             setAlertTitle('Error');
@@ -83,8 +115,8 @@ function ApplyForm({ serviceId }) {
             reason: reason,
             studentId: studentId,
             studentEmail: studentEmail,
-            startDate: "2023-05-03 14:00:00",
-            endDate: "2023-05-03 15:00:00"
+            startDate: bookStart,
+            endDate: bookEnd
         }
         if (!form.firstName) {
             firstNameInput.focus();
@@ -116,7 +148,6 @@ function ApplyForm({ serviceId }) {
             showWarning();
             return;
         }
-        console.log(form);
         let submitForm = {
             serviceId: serviceId,
             record: form
@@ -131,6 +162,7 @@ function ApplyForm({ serviceId }) {
                 setSeverity('success');
                 setAlertTitle('Reservation Success');
                 alter.current.showAlert('Your application is submitted');
+                queryRecordList(startDate, endDate);
             }
         }
     }
@@ -142,6 +174,7 @@ function ApplyForm({ serviceId }) {
                     plugins={[timeGridPlugin, interactionPlugin]}
                     initialView='timeGridWeek'
                     selectable={true}
+                    unselectAuto={false}
                     weekends={false}
                     allDaySlot={false}
                     height='100%'
@@ -149,9 +182,13 @@ function ApplyForm({ serviceId }) {
                     slotMaxTime="22:00:00"
                     slotDuration="00:15:00"
                     events={recordList}
+                    selectAllow={checkAllow}
+                    datesSet={updateList}
                 />
             </div>
             <Box component="form" noValidate autoComplete="off" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
+                <div className="timeBox"><span>Start&nbsp;Date: </span>{bookStart}</div>
+                <div className="timeBox"><span>End&nbsp;&nbsp;Date: </span>{bookEnd}</div>
                 <div>
                     <TextField id="firstName" label="first name" variant="outlined" required size="small"
                         inputRef={(input) => { setFirstNameInput(input) }}
