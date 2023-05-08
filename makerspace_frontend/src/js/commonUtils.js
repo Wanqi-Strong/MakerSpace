@@ -83,5 +83,12 @@ class commonUtils {
     getTodayDate(format = "YYYY-MM-DD") {
         return moment().format(format);
     };
+
+    // get the range of month
+    getOneMonth() {
+        const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+        const endOfMonth = moment().endOf('month').format('YYYY-MM-DD');
+        return [startOfMonth, endOfMonth];
+    }
 }
 export default new commonUtils();

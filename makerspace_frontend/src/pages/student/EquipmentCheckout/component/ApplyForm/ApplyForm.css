@@ -1,0 +1,13 @@
+.calendar {
+    width: 75%;
+    height: 600px;
+}
+
+.reservationBox {
+    width: 100%;
+    padding: 10px;
+}
+
+.timeBox{
+    padding: 10px;
+}

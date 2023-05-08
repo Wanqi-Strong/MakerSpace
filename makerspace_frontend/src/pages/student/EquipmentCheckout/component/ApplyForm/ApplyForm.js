@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import FullCalendar from '@fullcalendar/react'
-import timeGridPlugin from '@fullcalendar/timegrid'
+import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 
 import CustomAlert from './../../../../../components/alter/alter'
@@ -45,13 +45,12 @@ function ApplyForm({ serviceId }) {
     }
 
     function initData() {
-        // set date for this week
-        let dateRange = React.$utils.getOneDayInWeekAllDate();
+        // set date for this month
+        let dateRange = React.$utils.getOneMonth();
         const date1 = dateRange[0];
-        const date2 = dateRange[4];
+        const date2 = dateRange[1];
         setStartDate(date1);
         setEndDate(date2);
-        //queryRecordList(date1, date2);
     }
 
     // check the selected time is between any unavailable slot
@@ -65,10 +64,18 @@ function ApplyForm({ serviceId }) {
     // check the selected time is bigger than now or unavailable
     function checkAllow(info) {
         let moment = React.$utils.getMoment();
-        let start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
-        let end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
+        let start = moment(info.startStr + ' 10:00:00').format("YYYY-MM-DD HH:mm:ss");
+        let end = moment(info.endStr + ' 17:30:00').subtract(1, "days").format("YYYY-MM-DD HH:mm:ss");
+        let limit = moment(info.startStr + ' 17:30:00').add(7, 'days').format("YYYY-MM-DD HH:mm:ss")
         let now = new Date();
-        let valid = info.start > now && info.end > now && checkBetween(start, end);
+        // check if weekend
+        if (moment(info.startStr + ' 10:00:00').day() == 0 || moment(info.startStr + ' 10:00:00').day() == 6) {
+            return false
+        }
+        if (moment(info.endStr + ' 17:30:00').subtract(1, "days").day() == 0 || moment(info.endStr + ' 17:30:00').subtract(1, "days").day() == 6) {
+            return false
+        }
+        let valid = info.start > now && info.end > now && end < limit && checkBetween(start, end);
         if (valid) {
             setBookStart(start);
             setBookEnd(end)
@@ -80,21 +87,10 @@ function ApplyForm({ serviceId }) {
     function updateList(info) {
         let moment = React.$utils.getMoment();
         let start = moment(info.start).format("YYYY-MM-DD");
-        let end = moment(info.start).day(5).format("YYYY-MM-DD");
+        let end = moment(info.end).format("YYYY-MM-DD");
         setStartDate(start);
         setEndDate(end);
         queryRecordList(start, end);
-    }
-
-    // resetform
-    function resetform() {
-        setFirstName('');
-        setLastName('');
-        setReason('');
-        setStudentId('');
-        setStudentEmail('');
-        setBookStart('');
-        setBookEnd('');
     }
 
     async function queryRecordList(startDate, endDate) {
@@ -117,6 +113,17 @@ function ApplyForm({ serviceId }) {
             setAlertTitle('Error');
             alter.current.showAlert(res.message);
         }
+    }
+
+    // resetform
+    function resetform() {
+        setFirstName('');
+        setLastName('');
+        setReason('');
+        setStudentId('');
+        setStudentEmail('');
+        setBookStart('');
+        setBookEnd('');
     }
 
     async function handleSubmit() {
@@ -165,7 +172,7 @@ function ApplyForm({ serviceId }) {
         }
         let res = await React.$req.post(React.$api.reservationAdd, submitForm);
         if (res.success) {
-            if (res.data.data === "") {
+            if (res.data.data === '') {
                 setSeverity('success');
                 setAlertTitle('Reservation Success');
                 alter.current.showAlert('Your application is submitted');
@@ -175,7 +182,7 @@ function ApplyForm({ serviceId }) {
                 setAlertTitle('Reservation Fail');
                 alter.current.showAlert(res.data.data);
             }
-            resetform()
+            resetform();
         }
     }
 
@@ -183,16 +190,11 @@ function ApplyForm({ serviceId }) {
         <div className="reservationBox flex flex_center_ver">
             <div className="calendar">
                 <FullCalendar
-                    plugins={[timeGridPlugin, interactionPlugin]}
-                    initialView='timeGridWeek'
+                    plugins={[dayGridPlugin, interactionPlugin]}
+                    initialView='dayGridMonth'
                     selectable={true}
                     unselectAuto={false}
-                    weekends={false}
-                    allDaySlot={false}
                     height='100%'
-                    slotMinTime="10:45:00"
-                    slotMaxTime="22:00:00"
-                    slotDuration="00:15:00"
                     events={recordList}
                     selectAllow={checkAllow}
                     datesSet={updateList}

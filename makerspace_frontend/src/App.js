@@ -13,6 +13,8 @@ import StudioBooking from './pages/admin/studioBooking/studioBooking'
 // student pages
 import StudentHome from './pages/student/HomePage/StudentHome';
 import EquipmentApply from './pages/student/EquipmentApply/EquipmentApply'
+import EquipmentCheckout from './pages/student/EquipmentCheckout/EquipmentCheckout'
+
 // public css
 import './App.css';
 import './style/flex.css'
@@ -30,6 +32,7 @@ function App() {
           <Route path="/admin/studioBooking" element={<StudioBooking />} />
           <Route path="/student/home" element={<StudentHome />} />
           <Route path="/student/equipmentApply" element={<EquipmentApply />} />
+          <Route path="/student/EquipmentCheckout" element={<EquipmentCheckout />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </Layout>

@@ -53,10 +53,8 @@ public class RecordServiceImpl implements RecordService {
                 record.setState(1);
                 record.setStatus(1);
                 recordRepository.save(record);
-                msg = "applied successfully";
             }else{
                 for(Record recordItem: records){
-                    System.out.println(recordItem.getFacility());
                     if (recordItem.getFacility().getServiceId() == serviceId) {
                         msg = "time conflict";
                         break;

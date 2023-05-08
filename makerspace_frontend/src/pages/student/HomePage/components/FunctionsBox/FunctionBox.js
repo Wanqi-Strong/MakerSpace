@@ -21,7 +21,7 @@ const images = [
         url: image2,
         title: 'Checkout PCs & Equipment ',
         width: '33.33%',
-        link: ''
+        link: '/student/EquipmentCheckout'
     },
     {
         url: image3,
