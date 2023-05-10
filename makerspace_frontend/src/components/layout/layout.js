@@ -47,7 +47,7 @@ function Layout(props) {
         const [menuList] = useState([
             { name: 'Home', url: '/admin/home', id: 0 },
             { name: 'Studio Booking', url: '/admin/studioBooking', id: 1 },
-            { name: 'Checkout Booking', url: '/admin/studioBooking', id: 2 },
+            { name: 'Checkout Booking', url: '/admin/checkoutBooking', id: 2 },
             { name: 'Workshop Booking ', url: '/admin/workshoprecord', id: 3 },
             { name: 'Report', url: '/admin/report', id: 4 },
             { name: 'Equipment Management', url: '/admin/equipmentManagement', id: 5 },

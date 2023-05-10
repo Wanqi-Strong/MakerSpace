@@ -10,6 +10,7 @@ import Login from './pages/admin/login/login';
 import AdminHome from './pages/admin/home/home';
 import EquipmentManagement from './pages/admin/equipmentManagement/equipmentManagement';
 import StudioBooking from './pages/admin/studioBooking/studioBooking'
+import CheckoutBooking from './pages/admin/checkoutBooking/checkoutBooking'
 
 // student pages
 import StudentHome from './pages/student/HomePage/StudentHome';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
           <Route path="/admin/studioBooking" element={<StudioBooking />} />
+          <Route path="/admin/checkoutBooking" element={<CheckoutBooking />} />
           <Route path="/student/home" element={<StudentHome />} />
           <Route path="/student/equipmentApply" element={<EquipmentApply />} />
           <Route path="/student/EquipmentCheckout" element={<EquipmentCheckout />} />
