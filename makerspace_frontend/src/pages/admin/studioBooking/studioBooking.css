@@ -1,0 +1,8 @@
+.test {
+    max-height: 0;
+}
+
+.tableBox {
+    overflow: auto;
+    margin-bottom: 10px;
+}

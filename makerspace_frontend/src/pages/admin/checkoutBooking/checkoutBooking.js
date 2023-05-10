@@ -34,8 +34,11 @@ function CheckoutBooking(props) {
                 </div>
                 <Button variant="contained" onClick={queryList} size="small" >Search</Button>
             </div>
+
             <div className='flex_1 tableBox'>
-                <CustomPaginationActionsTable ref={customPaginationActionsTableRef} />
+                <div className='test'>
+                    <CustomPaginationActionsTable ref={customPaginationActionsTableRef} />
+                </div>
             </div>
         </div>
     )

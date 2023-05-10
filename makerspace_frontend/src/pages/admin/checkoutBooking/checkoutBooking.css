@@ -1,0 +1,22 @@
+.test {
+    max-height: 0;
+}
+
+.tableBox {
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.tableBox::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.tableBox::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.tableBox::-webkit-scrollbar-thumb {
+    background: #2196f3;
+    border-radius: 25px;
+}
