@@ -67,7 +67,13 @@ function Layout(props) {
         const location = useLocation();
         function navigateTo() {
             try {
-                navigate(item.url);
+                // check session
+                let user = React.$utils.getSessionStorage("userInfo");
+                if (React.$utils.isEmpty(user)) {
+                    navigate('/admin/login');
+                } else {
+                    navigate(item.url);
+                }
             } catch (e) {
                 throw e;
             }

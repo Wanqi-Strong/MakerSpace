@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import React from "react"
 
 // public pages
 import NoPage from './components/noPage/noPage';
@@ -22,6 +24,10 @@ import './App.css';
 import './style/flex.css'
 
 function App() {
+  function Auth({ children }) {
+    const user = React.$utils.getSessionStorage("userInfo");
+    return !React.$utils.isEmpty(user) ? (children) : <Navigate to="/admin/login" replace={true} />
+  }
   return (
     <BrowserRouter>
       <Layout>
@@ -29,10 +35,10 @@ function App() {
           {/* <Route path="/" element={<Login />} exact /> */}
           <Route path="/" element={<Home />} exact />
           <Route path="/admin/login" element={<Login />} />
-          <Route path="/admin/home" element={<AdminHome />} />
-          <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
-          <Route path="/admin/studioBooking" element={<StudioBooking />} />
-          <Route path="/admin/checkoutBooking" element={<CheckoutBooking />} />
+          <Route path="/admin/home" element={<Auth><AdminHome /></Auth>} />
+          <Route path="/admin/equipmentManagement" element={<Auth><EquipmentManagement /></Auth>} />
+          <Route path="/admin/studioBooking" element={<Auth><StudioBooking /></Auth>} />
+          <Route path="/admin/checkoutBooking" element={<Auth><CheckoutBooking /></Auth>} />
           <Route path="/student/home" element={<StudentHome />} />
           <Route path="/student/equipmentApply" element={<EquipmentApply />} />
           <Route path="/student/EquipmentCheckout" element={<EquipmentCheckout />} />
