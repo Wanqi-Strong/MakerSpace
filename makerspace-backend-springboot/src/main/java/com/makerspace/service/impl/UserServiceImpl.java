@@ -5,6 +5,7 @@ import com.makerspace.dao.UserRepository;
 import com.makerspace.entity.User;
 import com.makerspace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User verifyUser(User user) {
         User currentUser= userRepository.findByUserEmail(user.getUserEmail());
@@ -22,7 +26,7 @@ public class UserServiceImpl implements UserService {
             throw new MakerSpaceException("user does not exist");
         }else {
             // compare password
-            if(Objects.equals(currentUser.getUserPwd(), user.getUserPwd())) {
+            if(passwordEncoder.matches( user.getUserPwd(),currentUser.getUserPwd())) {
                 return currentUser;
             }else {
                 throw new MakerSpaceException("incorrect password");
@@ -40,8 +44,7 @@ public class UserServiceImpl implements UserService {
         }
         // set status
         user.setStatus(1);
-        //TODO encode password
-        user.setUserPwd(user.getUserPwd());
+        user.setUserPwd(passwordEncoder.encode(user.getUserPwd()));
         userRepository.save(user);
         return userRepository.findByUserEmail(email);
     }
