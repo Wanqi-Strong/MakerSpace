@@ -4,7 +4,7 @@ import React,{useState} from "react"
 
 import Icon from '@mui/material/Icon';
 
-function Home(props){
+function AdminHome(props){
     const [summaryInfo, setSummaryInfo] = useState([
         {title:'Total Booking',value:132,per:0.032},
         {title:'Total Checkout',value:88,per:0.015},
@@ -48,4 +48,4 @@ function Home(props){
         </div>
     )
 }
-export default Home;
+export default AdminHome;

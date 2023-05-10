@@ -19,6 +19,9 @@ function Layout(props) {
                 url = '/admin/login'
             }
         }
+        if (location.pathname.includes('student')) {
+            url = '/student/home'
+        }
         try {
             navigate(url);
         } catch (e) {

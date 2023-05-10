@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // public pages
 import NoPage from './components/noPage/noPage';
 import Layout from './components/layout/layout';
+import Home from './pages/home/home';
 
 // admin pages
 import Login from './pages/admin/login/login';
-import Home from './pages/admin/home/home';
+import AdminHome from './pages/admin/home/home';
 import EquipmentManagement from './pages/admin/equipmentManagement/equipmentManagement';
 import StudioBooking from './pages/admin/studioBooking/studioBooking'
 
@@ -25,9 +26,9 @@ function App() {
       <Layout>
         <Routes>
           {/* <Route path="/" element={<Login />} exact /> */}
-          <Route path="/" element={<StudentHome />} exact />
+          <Route path="/" element={<Home />} exact />
           <Route path="/admin/login" element={<Login />} />
-          <Route path="/admin/home" element={<Home />} />
+          <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/equipmentManagement" element={<EquipmentManagement />} />
           <Route path="/admin/studioBooking" element={<StudioBooking />} />
           <Route path="/student/home" element={<StudentHome />} />
