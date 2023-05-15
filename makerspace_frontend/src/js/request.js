@@ -1,21 +1,10 @@
 import axios from "axios";
 
+// dev
 const baseUrl = "http://localhost:8089/makerSpace/api";
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = baseUrl;
-// axios.interceptors.request.use(
-//   (config) => {
-//     console.log(config)
-//     config.data = JSON.stringify(config.data);
-//     config.headers = {
-//       "Content-Type": "application/json",
-//     };
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+
 class httpRequest {
   async get(url, params = {}) {
     return new Promise((resolve, reject) => {

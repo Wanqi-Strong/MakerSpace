@@ -9,5 +9,6 @@ const apiList = {
     reservationAll: '/record/all',
     reservationByService: '/record/allByIdAndTime',
     reservationByType: '/record/allByType',
+    summaryByMonth:'/report/monthSummary'
 }
 export default apiList;

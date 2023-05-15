@@ -1,30 +1,48 @@
-.summaryBox{
+.summaryBox {
     width: 100%;
     height: 25%;
+    padding-top: 10px;
 }
-.dataBox{
+
+.dataBox {
     width: 30%;
 }
-.dataBox >div:first-child{
+
+.dataBox>div:first-child {
     font-weight: bold;
-    background-color: #e2e2e2;
+    color: #fff;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.dataBox >div:last-child{
-    background-color: #e2e2e2;
+
+.dataBox>div:last-child {
     padding: 10px;
     border-radius: 5px;
 }
-.chartBox{
+
+.chartBox {
     height: 75%;
     width: 100%;
     padding: 20px;
 }
-.chartBox >div{
+
+.chartBox>div {
     width: 40%;
     height: 100%;
     border: 1px solid #e2e2e2;
-    margin: 20px;;
+    margin: 20px;
+    ;
+}
+
+.summaryBox>.dataBox:first-child>div {
+    background: linear-gradient(to top, #fff, 20%, #fe9496);
+}
+
+.summaryBox>.dataBox:nth-child(2)>div {
+    background: linear-gradient(to bottom, #fff, 20%, #4bcbeb);
+}
+
+.summaryBox>.dataBox:last-child>div {
+    background: linear-gradient(to top, #fff, 20%, #1bcfb4);
 }

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `makerspace_db`.`user` (
   `status` INT(1) NOT NULL DEFAULT '1' COMMENT 'active-1,inactive-0',
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `makerspace_db`.`services` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 15
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
