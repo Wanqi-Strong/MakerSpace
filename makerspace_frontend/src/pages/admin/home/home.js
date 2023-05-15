@@ -21,7 +21,7 @@ function AdminHome(props) {
     }, [])
 
     async function query() {
-        let res = await React.$req.post(React.$api.summaryByMonth);
+        let res = await React.$req.post(React.$api.summaryForThisMonth);
         if (res.success) {
             let list = res.data.data, info = [...summaryInfo];
             for (let i of list) {

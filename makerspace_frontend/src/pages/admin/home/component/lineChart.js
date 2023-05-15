@@ -10,65 +10,60 @@ import {
     Legend
 } from "recharts";
 
-const data = [
-    {
-        name: "1",
-        equipment: 30,
-        workshop: 12,
-        amt: 2400
-    },
-    {
-        name: "2",
-        equipment: 45,
-        workshop: 54,
-        amt: 99
-    },
-    {
-        name: "3",
-        equipment: 32,
-        workshop: 80,
-        amt: 112
-    },
-    {
-        name: "4",
-        equipment: 64,
-        workshop: 24,
-        amt: 88
-    },
-    {
-        name: "5",
-        equipment: 112,
-        workshop: 90,
-        amt: 202
-    },
-    {
-        name: "6",
-        equipment: 10,
-        workshop: 38,
-        amt: 48
-    },
-];
-
 function MyLineChart(props) {
 
     const [list, setList] = React.useState([]);
 
     React.useEffect(() => {
-        //query()
+        query();
     }, [])
 
+    function initMonth() {
+        let copy = [...list];
+        let moment = React.$utils.getMoment();
+        for (let i = 5; i > 0; i--) {
+            let m = moment().subtract(i, 'months').format('M');
+            let obj = {
+                "equipment": 0,
+                "month": m,
+                "studio": 0,
+                "workshop": 0,
+            }
+            copy.push(obj);
+        }
+        let obj = {
+            "equipment": 0,
+            "month": moment().format('M'),
+            "studio": 0,
+            "workshop": 0,
+        }
+        copy.push(obj);
+        return copy;
+    }
+
     async function query() {
-        let res = await React.$req.post(React.$api.summaryByMonth);
-        console.log(res)
+        let res = await React.$req.post(React.$api.summaryForMonth, { 'month': 6 });
         if (res.success) {
-            setList(res.data.data)
+            let copy = [...list];
+            let ans = initMonth();
+            for (let i of ans) {
+                for (let i1 of res.data.data) {
+                    if (i["month"] == i1["month"]) {
+                        i["equipment"] = i1["equipment"];
+                        i["studio"] = i1["studio"];
+                        i["workshop"] = i1["workshop"];
+                    }
+                }
+            }
+            copy = ans;
+            setList(copy)
         }
     }
     return (
         <LineChart
             width={500}
             height={300}
-            data={data}
+            data={list}
             margin={{
                 top: 5,
                 right: 30,
@@ -77,7 +72,7 @@ function MyLineChart(props) {
             }}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -88,6 +83,12 @@ function MyLineChart(props) {
                 activeDot={{ r: 8 }}
             />
             <Line type="monotone" dataKey="equipment" stroke="#4bcbeb" />
+            <Line
+                type="monotone"
+                dataKey="studio"
+                stroke="#fe9496"
+                activeDot={{ r: 12 }}
+            />
         </LineChart>
     );
 }

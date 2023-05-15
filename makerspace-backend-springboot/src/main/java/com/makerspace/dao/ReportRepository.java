@@ -16,4 +16,12 @@ public interface ReportRepository extends CrudRepository<Record,Long> {
             "AND YEAR(r.start_date) = YEAR(CURRENT_DATE()) " +
             "GROUP BY s.service_type;",nativeQuery = true)
     List<Map> getMonthSummary();
+
+    @Query(value = "SELECT  count(*) AS sum,service_type AS type, month(r.start_date) AS month " +
+            "FROM record AS r " +
+            "LEFT JOIN services AS s " +
+            "ON r.service_id = s.service_id " +
+            "WHERE r.start_date > DATE_SUB(now(), INTERVAL ?1 MONTH) " +
+            "GROUP BY s.service_type, month(r.start_date);",nativeQuery = true)
+    List<Map> getSummaryForMonth(int month);
 }

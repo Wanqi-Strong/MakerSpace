@@ -9,4 +9,6 @@ import java.util.Map;
  */
 public interface ReportService {
     public List<Map> getMonthSummary();
+
+    public List<Map> getSummaryForMonth(int month);
 }
