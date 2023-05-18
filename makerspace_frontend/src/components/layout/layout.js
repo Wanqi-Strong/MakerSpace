@@ -13,7 +13,7 @@ function Layout(props) {
     function reFresh() {
         let url = ''
         if (location.pathname.includes('admin')) {
-            if (!location.pathname.includes('login')) {
+            if (!location.pathname.includes('login') && !location.pathname.includes('signup')) {
                 url = '/admin/home'
             } else {
                 url = '/admin/login'
@@ -30,7 +30,7 @@ function Layout(props) {
     }
 
     function Navigation(props) {
-        if (location.pathname.includes('admin') && !location.pathname.includes('login')) {
+        if (location.pathname.includes('admin') && !location.pathname.includes('login') && !location.pathname.includes('signup')) {
             return (
                 <nav>
                     <div className='dashboard-title'>Dashboard</div>

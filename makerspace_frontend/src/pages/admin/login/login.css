@@ -1,3 +1,6 @@
 .center-box{
     text-align: center;
 }
+.center-box button{
+    margin: 20px;
+}

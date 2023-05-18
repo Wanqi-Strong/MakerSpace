@@ -9,6 +9,7 @@ import Home from './pages/home/home';
 
 // admin pages
 import Login from './pages/admin/login/login';
+import Signup from './pages/admin/signup/signup';
 import AdminHome from './pages/admin/home/home';
 import EquipmentManagement from './pages/admin/equipmentManagement/equipmentManagement';
 import StudioBooking from './pages/admin/studioBooking/studioBooking'
@@ -35,6 +36,7 @@ function App() {
           {/* <Route path="/" element={<Login />} exact /> */}
           <Route path="/" element={<Home />} exact />
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/signup" element={<Signup />} />
           <Route path="/admin/home" element={<Auth><AdminHome /></Auth>} />
           <Route path="/admin/equipmentManagement" element={<Auth><EquipmentManagement /></Auth>} />
           <Route path="/admin/studioBooking" element={<Auth><StudioBooking /></Auth>} />
