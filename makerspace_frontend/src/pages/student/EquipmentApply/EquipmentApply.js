@@ -16,7 +16,6 @@ function EquipmentApply(props) {
 
     async function queryEquipmentList() {
         let res = await React.$req.post(React.$api.serviceAllByType, { type: 3, active: 1 });
-        console.log(res);
         if (res.success) {
             setEquipmentList(res.data.data || [])
         }

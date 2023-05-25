@@ -16,8 +16,6 @@ public class Record {
     public Record(String studentEmail, Long studentId, String createDate, String updateDate, int status) {
         this.studentEmail = studentEmail;
         this.studentId = studentId;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
         this.status = status;
     }
 
@@ -55,12 +53,6 @@ public class Record {
 
     @Column(name = "reason")
     private String reason;
-
-    @Column(name = "create_date")
-    private String createDate;
-
-    @Column(name = "update_date")
-    private String updateDate;
 
     @Column(name = "status")
     private int status;
@@ -124,22 +116,6 @@ public class Record {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
     }
 
     public int getStatus() {

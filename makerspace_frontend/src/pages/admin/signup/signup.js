@@ -9,10 +9,12 @@ import CustomAlert from './../../../components/alter/alter'
 function Signup(props) {
     const [name, setName] = useState('');
     const [pwd, setPwd] = useState('');
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
     const [nameInput, setNameInput] = useState(null);
     const [pwdInput, setPwdInput] = useState(null);
+    const [emailInput, setEmailInput] = useState(null);
 
     const alter = useRef();
 
@@ -20,11 +22,17 @@ function Signup(props) {
 
     async function handleSubmit() {
         let form = {
-            userEmail: name.trim(),
+            userEmail: email.trim(),
             userPwd: pwd.trim(),
+            userName: name.trim(),
+        }
+        if (!form.userName) {
+            nameInput.focus();
+            alter.current.showAlert('please input name');
+            return;
         }
         if (!form.userEmail) {
-            nameInput.focus();
+            emailInput.focus();
             alter.current.showAlert('please input email');
             return;
         }
@@ -59,9 +67,14 @@ function Signup(props) {
         <div className="container flex flex_ver flex_center_all">
             <Box component="form" noValidate autoComplete="off" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}>
                 <div>
-                    <TextField id="username" label="user email" variant="outlined" required size="small"
+                    <TextField id="username" label="user name" variant="outlined" required size="small"
                         inputRef={(input) => { setNameInput(input) }}
                         value={name} onChange={(event) => { setName(event.target.value); }} />
+                </div>
+                <div>
+                    <TextField id="email" label="user email" variant="outlined" required size="small"
+                        inputRef={(input) => { setEmailInput(input) }}
+                        value={email} onChange={(event) => { setEmail(event.target.value); }} />
                 </div>
                 <div>
                     <TextField id="password" label="password" variant="outlined" type="password" required size="small"

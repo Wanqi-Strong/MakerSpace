@@ -1,7 +1,9 @@
 import axios from "axios";
 
 // dev
-const baseUrl = "http://localhost:8089/makerSpace/api";
+const baseUrl = "http://localhost:5000/makerSpace/api";
+// pro
+//const baseUrl = "http://makerspace-env.eu-west-1.elasticbeanstalk.com/makerSpace/api";
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = baseUrl;
 

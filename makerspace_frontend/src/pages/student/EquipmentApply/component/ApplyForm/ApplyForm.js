@@ -129,6 +129,22 @@ function ApplyForm({ serviceId }) {
             startDate: bookStart,
             endDate: bookEnd
         }
+        if (!form.startDate) {
+            alter.current.showAlert('please select startDate');
+            showWarning();
+            return;
+        }
+        if (!form.endDate) {
+            alter.current.showAlert('please select endDate');
+            showWarning();
+            return;
+        }
+        if (!form.firstName) {
+            firstNameInput.focus();
+            alter.current.showAlert('please input firstName');
+            showWarning();
+            return;
+        }
         if (!form.firstName) {
             firstNameInput.focus();
             alter.current.showAlert('please input firstName');

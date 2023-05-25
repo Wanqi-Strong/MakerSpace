@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `makerspace_db`.`services` (
   `category` INT(1) NULL DEFAULT NULL COMMENT 'when service_type equals to 1, this attribute identify equipment category',
   `active` INT(1) NOT NULL DEFAULT '1' COMMENT '1 means available for student, 0 means unavailable.',
   PRIMARY KEY (`service_id`),
-  INDEX `fk_user` (`operator_id` ASC) VISIBLE,
+  INDEX `fk_user` (`operator_id` ASC),
   CONSTRAINT `fk_user`
     FOREIGN KEY (`operator_id`)
     REFERENCES `makerspace_db`.`user` (`user_id`)
@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS `makerspace_db`.`record` (
   `reason` VARCHAR(125) NULL DEFAULT NULL,
   `status` INT(1) NOT NULL DEFAULT '1' COMMENT '1 means available, 0 means unavailable as logical deleted',
   `update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_email` VARCHAR(45) NOT NULL COMMENT 'student email or staff email',
+  `student_email` VARCHAR(45) NOT NULL COMMENT 'student email or staff email',
   `service_id` INT(11) NOT NULL,
-  `user_id` VARCHAR(45) NOT NULL COMMENT 'student id or staff id',
+  `student_id` VARCHAR(45) NOT NULL COMMENT 'student id or staff id',
   `start_date` TIMESTAMP NULL DEFAULT NULL COMMENT 'for equipment and studio',
   `end_date` TIMESTAMP NULL DEFAULT NULL COMMENT 'for equipment and studio',
   `state` INT(1) NOT NULL DEFAULT '1' COMMENT '1 means pending, 2 means in processing, 3 means complete, 4 means expired',
   PRIMARY KEY (`record_id`),
-  INDEX `fk_service` (`service_id` ASC) VISIBLE,
+  INDEX `fk_service` (`service_id` ASC),
   CONSTRAINT `fk_service`
     FOREIGN KEY (`service_id`)
     REFERENCES `makerspace_db`.`services` (`service_id`)

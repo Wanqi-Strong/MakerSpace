@@ -36,7 +36,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Iterable<Record> getAllRecord() {
-        return recordRepository.findAllByOrderByCreateDate();
+        return recordRepository.findAllByOrderByStartDate();
     }
 
     @Override
