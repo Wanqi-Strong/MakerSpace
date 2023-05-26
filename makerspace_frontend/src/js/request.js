@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// dev
+// baseUrl is the URL of backend project
+// for local project, default port 5000
 const baseUrl = "http://localhost:5000/makerSpace/api";
-// pro
+// for deployed project
 //const baseUrl = "http://makerspace-env.eu-west-1.elasticbeanstalk.com/makerSpace/api";
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = baseUrl;
